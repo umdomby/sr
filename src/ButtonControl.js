@@ -1,46 +1,87 @@
 import {observer} from "mobx-react-lite";
-import React, {useEffect, useState} from "react";
-import SliderUpDown from "./components/SliderUpDown";
+import React, {useEffect, useRef, useState} from "react";
 import SliderLeftRight from "./components/SliderLeftRight";
 import SliderReversal from "./components/SliderReversal";
 import 'react-rangeslider/lib/index.css';
 import {Col, Container, Row} from "react-bootstrap";
 import Demonstration from "./components/Joy/Demonstration"
 //import {ControlSliderUpDown} from "./Control/controlJoy/ControlSliderUpDown";
+import store from "./store/DeviceStore"
+//import SliderUpDown from "./components/SliderUpDown"
+import {SliderUpDown} from "./Control/sliderUpDown";
+import useEventListener from '@use-it/event-listener'
+
 const ButtonControl = observer(() => {
 
-    //const [state, setState] = useState('');
-    const handler = (event) => {
-        // changing the state to the name of the key
-        // which is pressed
-        // setState(event.key);
-        console.log(event.key);
-    };
+    // const [state, setState] = useState(0);
+    // const inputEl = useRef(0);
+    // const handler = (event) => {
+    //     // changing the state to the name of the key
+    //     // which is pressed
+    //     // setState(event.key);
+    //     // console.log(event.key);
+    // };
 
-    window.addEventListener('keypress', function(event) {
-        console.log('CMD DOWN: ' + event.key);
-    });
 
+    function handler({ key }) {
+        //console.log(String(key));
+        // if(String(key) == 'w' || String(key) == 'W') {
+        //     console.log('w key pressed!');
+        // }
+
+        if(String(key) == 'w' || String(key) == 'W' || String(key) == 'ц' || String(key) == 'Ц') {
+            if(store.sliderUpDown < 40) {
+                store.setSliderUpDown(store.sliderUpDown + 1)
+                SliderUpDown(store.sliderUpDown)
+                //setState(state + 1)
+                //SliderUpDown(store.sliderUpDown)
+            }
+            console.log('CMD DOWN: WWWWW ' + store.sliderUpDown);
+        }
+        if(String(key) == 's' || String(key) == 'S' || String(key) == 'ы' || String(key) == 'Ы'){
+            if(store.sliderUpDown > 0) {
+                store.setSliderUpDown(store.sliderUpDown - 1)
+                SliderUpDown(store.sliderUpDown)
+            }
+            console.log('CMD DOWN: WWWWW ' + store.sliderUpDown);
+        }
+
+    }
+    useEventListener('keydown', handler);
+
+    // window.addEventListener('keydown', function(event) {
     // document.body.addEventListener('keypress', function(event) {
     //     console.log('CMD DOWN: ' + event.key);
     // });
 
-    // window.addEventListener("keyup", log);
-    // window.addEventListener("keypress", log);
-    // window.addEventListener("keydown", log);
-    //
-    // function log(event){
-    //     console.log( event.type );
-    // }
-
     //ButtonSliderUpDown(movement.x, movement.y)
+
+    const handleChange = (value) => {
+        //setState(value)
+        store.setSliderUpDown(Number(value))
+        console.log('SliderUPDown ' + store.sliderUpDown)
+        SliderUpDown(Number(value))
+    }
 
     return (
         <div className="App">
             <Container>
                 <Row>
                     <Col>
-                        <SliderUpDown/>
+                        <input
+                            type="range"
+                            min="0"
+                            max="40"
+                            value={store.sliderUpDown}
+                            className="form-range"
+                            onChange={(event) => {
+                                //localStorage.setItem('localSpeedStateUD', event.target.value)
+                                handleChange(event.target.value)
+                            }}
+                            id="customRange1">
+                        </ input>
+                        {store.sliderUpDown}
+                        {/*<SliderUpDown/>*/}
                     </Col>
                     <Col>
                         {/*<div className="Joy">*/}

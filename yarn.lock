@@ -2285,6 +2285,11 @@
     "@typescript-eslint/types" "5.30.3"
     "eslint-visitor-keys" "^3.3.0"
 
+"@use-it/event-listener@^0.1.7":
+  "integrity" "sha512-hgfExDzUU9uTRTPDCpw2s9jWTxcxmpJya3fK5ADpf5VDpSy8WYwY/kh28XE0tUcbsljeP8wfan48QvAQTSSa3Q=="
+  "resolved" "https://registry.npmjs.org/@use-it/event-listener/-/event-listener-0.1.7.tgz"
+  "version" "0.1.7"
+
 "@webassemblyjs/ast@1.11.1":
   "integrity" "sha512-ukBh14qFLjxTQNTXocdyksN5QdM28S1CxHt2rdskFyL+xFV7VremuBLVbmCePj+URalXBENx/9Lm7lnhihtCSw=="
   "resolved" "https://registry.npmjs.org/@webassemblyjs/ast/-/ast-1.11.1.tgz"
@@ -6450,10 +6455,17 @@
   dependencies:
     "minimist" "^1.2.6"
 
-"mobx-react-lite@^3.2.3":
+"mobx-react-lite@^3.2.3", "mobx-react-lite@^3.4.0":
   "integrity" "sha512-bRuZp3C0itgLKHu/VNxi66DN/XVkQG7xtoBVWxpvC5FhAqbOCP21+nPhULjnzEqd7xBMybp6KwytdUpZKEgpIQ=="
   "resolved" "https://registry.npmjs.org/mobx-react-lite/-/mobx-react-lite-3.4.0.tgz"
   "version" "3.4.0"
+
+"mobx-react@^7.5.1":
+  "integrity" "sha512-VNRpKBNpJEYER3XdkcY1PAr9zxFIaR2Ka6xwKFvySbEUC/uIITKt8rioVDqBdTc9pPzaYiCLw2dYpUOU85GQ5w=="
+  "resolved" "https://registry.npmjs.org/mobx-react/-/mobx-react-7.5.1.tgz"
+  "version" "7.5.1"
+  dependencies:
+    "mobx-react-lite" "^3.4.0"
 
 "mobx@^6.1.0", "mobx@^6.6.1":
   "integrity" "sha512-7su3UZv5JF+ohLr2opabjbUAERfXstMY+wiBtey8yNAPoB8H187RaQXuhFjNkH8aE4iHbDWnhDFZw0+5ic4nGQ=="

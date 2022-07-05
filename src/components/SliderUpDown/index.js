@@ -11,6 +11,15 @@ class Vertical extends Component {
         }
     }
 
+    // handleIncrement = () => {
+    //     this.setState({
+    //         value: value
+    //     })
+    // }
+
+   //store.sliderUpDown
+   //@observable count = 0wwwwwww
+
     handleChange = (value) => {
         this.setState({
             value: value
