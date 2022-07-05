@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Slider from 'react-rangeslider'
+import {SliderUpDown} from "../../Control/sliderUpDown";
 
 class Vertical extends Component {
     constructor (props, context) {
@@ -14,6 +15,8 @@ class Vertical extends Component {
         this.setState({
             value: value
         })
+        SliderUpDown(value)
+        console.log('SliderUPDown ' + value)
     }
 
     handleChangeZero = () => {
@@ -36,7 +39,7 @@ class Vertical extends Component {
                     <div className='slider-vertical'>
                         <Slider
                             min={0}
-                            max={100}
+                            max={40}
                             value={value}
                             orientation='vertical'
                             onChange={this.handleChange}

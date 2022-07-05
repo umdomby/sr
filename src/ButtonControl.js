@@ -43,10 +43,10 @@ const ButtonControl = observer(() => {
                         <SliderUpDown/>
                     </Col>
                     <Col>
-                        <div className="Joy">
+                        {/*<div className="Joy">*/}
                             <Demonstration/>
                             {/*<input style={{width:'20%', backgroundColor:'black'}} type="text" value="" onKeyPress={(e) => handler(e)} />*/}
-                        </div>
+                        {/*</div>*/}
                     </Col>
                     <Col>
                         <div style={{ marginTop: '10%' }}>

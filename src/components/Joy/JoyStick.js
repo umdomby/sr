@@ -214,7 +214,7 @@ export default class Joystick {
         this.movement.y = movement.y
         this.angleInDegrees = degreeAngle
 
-        console.log(movement.x +" | " + movement.y)
+        console.log("JoyStick " + movement.x +" | " + movement.y)
         ControlJoy(movement.x, movement.y)
     }
 
