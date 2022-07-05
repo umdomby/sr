@@ -42,7 +42,7 @@ class Vertical extends Component {
                             onChange={this.handleChange}
                             onChangeComplete={this.handleChangeZero}
                         />
-                        <div className='value'>{value}</div>
+                        {/*<div className='value'>{value}</div>*/}
                     </div>
                     {/*<div className='slider-horizontal'>*/}
                     {/*    <Slider*/}

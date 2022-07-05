@@ -9,7 +9,6 @@ export const ControlJoy = (x, y) => {
         accel: 1,
         stop: 0
     }))
-
 }
 
 
