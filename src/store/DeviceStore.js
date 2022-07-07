@@ -1,5 +1,4 @@
 import {makeAutoObservable} from "mobx";
-import {SliderUpDown} from "../Control/sliderUpDown";
 
 class DeviceStore {
 
@@ -19,14 +18,14 @@ class DeviceStore {
         this._delaycommand = 0
         this._ipaddress = 'localhost'
         this._idSocket = ''
-        this._sliderUpDown = 70
+        this._messageLR = 70
         //this._ipaddress = '192.168.0.107'
         //this._ipaddress = 'wss://cyberbet.online:81'
         makeAutoObservable(this)
     }
 
-    get sliderUpDown() {return this._sliderUpDown;}
-    setSliderUpDown(value) {this._sliderUpDown = value;}
+    get messageLR() {return this._messageLR;}
+    setMessageLR(value) {this._messageLR = value;}
 
     get idSocket() {return this._idSocket;}
     setIdSocket(value) {this._idSocket = value;}

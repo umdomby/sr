@@ -4,8 +4,8 @@ export const ControlJoy = (x, y) => {
     store.webSocket.send(JSON.stringify({
         id: store.idSocket,
         method: 'messages',
-        messageX: x,
-        messageY: y,
+        messageL: x,
+        messageR: y,
         accel: 1,
         stop: 0
     }))
