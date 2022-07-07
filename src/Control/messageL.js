@@ -5,6 +5,7 @@ export const messageL = (L) => {
         id: store.idSocket,
         method: 'messagesL',
         messageL: L,
+        messageR: store.messageR,
         accel: 1,
         stop: 0
     }))

@@ -41,6 +41,40 @@ const ButtonControl = observer(() => {
             }
             console.log('CMD DOWN: WWWWW ' + store.messageR);
         }
+
+        if(String(key) == 'a' || String(key) == 'A' || String(key) == 'ф' || String(key) == 'Ф') {
+
+            if(store.messageR < store.messageL && store.messageL <= 120){
+                store.setMessageR(store.messageR + 3)
+                messageR(store.messageR)
+            }
+            else if(store.messageR > store.messageL){
+                store.setMessageL(store.messageL - 3)
+                messageL(store.messageL)
+            }
+            else if(store.messageR == store.messageL){
+                store.setMessageL(store.messageL - 3)
+                messageL(store.messageL)
+            }
+
+            console.log('CMD DOWN: WWWWW ' + store.messageL);
+        }
+        if(String(key) == 'd' || String(key) == 'D' || String(key) == 'в' || String(key) == 'В'){
+            if(store.messageL < store.messageR && store.messageR <= 120){
+                store.setMessageL(store.messageL + 3)
+                messageL(store.messageL)
+            }
+            else if(store.messageL > store.messageR){
+                store.setMessageR(store.messageR - 3)
+                messageR(store.messageR)
+            }
+
+            else if(store.messageR == store.messageL){
+                store.setMessageR(store.messageR - 3)
+                messageR(store.messageR)
+            }
+            console.log('CMD DOWN: WWWWW ' + store.messageR);
+        }
     }
     useEventListener('keydown', handler);
 
@@ -95,7 +129,7 @@ const ButtonControl = observer(() => {
                             }}
                             id="customRange1">
                         </ input>
-                        {store.messageL}
+                        {store.messageR}
                     </Col>
                     <Col>
                         {/*<div className="Joy">*/}
