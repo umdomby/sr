@@ -1,22 +1,18 @@
 import './App.css';
 import {observer} from "mobx-react-lite";
+
 //import Dictaphone33 from "./components/Dictaphone33";
 //import CameraFaceDetect from "./views/cameraFaceDetect";
-
 //import { BrowserRouter, Route, Switch } from 'react-router-dom';
 //import styled from 'styled-components';
-// import Main from './components/VideoChat/Main/Main';
-// import Room from './components/VideoChat/Room/Room';
+//import Main from './components/VideoChat/Main/Main';
+//import Room from './components/VideoChat/Room/Room';
+
 import React, {useEffect, useState} from "react";
 import Video from "./components/Video/Video";
 import WebSocketProject from "./components/WebSocketProject";
-
-import SliderUpDown from "./components/SliderUpDown";
-import SliderLeftRight from "./components/SliderLeftRight";
-import SliderReversal from "./components/SliderReversal";
 import 'react-rangeslider/lib/index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Col, Container, Row} from "react-bootstrap";
 import ButtonControl from "./ButtonControl"
 const App = observer(() => {
 

@@ -1,7 +1,5 @@
 import {observer} from "mobx-react-lite";
-import React, {useEffect, useRef, useState} from "react";
-import SliderLeftRight from "./components/SliderLeftRight";
-import SliderReversal from "./components/SliderReversal";
+import React from "react";
 import 'react-rangeslider/lib/index.css';
 import {Col, Container, Row} from "react-bootstrap";
 import Demonstration from "./components/Joy/Demonstration"
@@ -30,8 +28,8 @@ const ButtonControl = observer(() => {
         // }
 
         if(String(key) == 'w' || String(key) == 'W' || String(key) == 'ц' || String(key) == 'Ц') {
-            if(store.sliderUpDown < 120) {
-                store.setSliderUpDown(store.sliderUpDown + 5)
+            if(store.sliderUpDown < 117) {
+                store.setSliderUpDown(store.sliderUpDown + 3)
                 SliderUpDown(store.sliderUpDown)
                 //setState(state + 1)
                 //SliderUpDown(store.sliderUpDown)
@@ -40,7 +38,7 @@ const ButtonControl = observer(() => {
         }
         if(String(key) == 's' || String(key) == 'S' || String(key) == 'ы' || String(key) == 'Ы'){
             if(store.sliderUpDown > 0) {
-                store.setSliderUpDown(store.sliderUpDown - 5)
+                store.setSliderUpDown(store.sliderUpDown - 3)
                 SliderUpDown(store.sliderUpDown)
             }
             console.log('CMD DOWN: WWWWW ' + store.sliderUpDown);
@@ -81,7 +79,6 @@ const ButtonControl = observer(() => {
                             id="customRange1">
                         </ input>
                         {store.sliderUpDown}
-                        {/*<SliderUpDown/>*/}
                     </Col>
                     <Col>
                         {/*<div className="Joy">*/}
@@ -90,12 +87,7 @@ const ButtonControl = observer(() => {
                         {/*</div>*/}
                     </Col>
                     <Col>
-                        <div style={{ marginTop: '10%' }}>
-                            <SliderLeftRight/>
-                        </div>
-                        <div style={{ marginTop: '20%' }}>
-                            <SliderReversal/>
-                        </div>
+
                     </Col>
                 </Row>
             </Container>
