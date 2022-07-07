@@ -19,7 +19,7 @@ class DeviceStore {
         this._delaycommand = 0
         this._ipaddress = 'localhost'
         this._idSocket = ''
-        this._sliderUpDown = 15
+        this._sliderUpDown = 70
         //this._ipaddress = '192.168.0.107'
         //this._ipaddress = 'wss://cyberbet.online:81'
         makeAutoObservable(this)

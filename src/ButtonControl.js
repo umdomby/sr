@@ -30,8 +30,8 @@ const ButtonControl = observer(() => {
         // }
 
         if(String(key) == 'w' || String(key) == 'W' || String(key) == 'ц' || String(key) == 'Ц') {
-            if(store.sliderUpDown < 40) {
-                store.setSliderUpDown(store.sliderUpDown + 1)
+            if(store.sliderUpDown < 120) {
+                store.setSliderUpDown(store.sliderUpDown + 5)
                 SliderUpDown(store.sliderUpDown)
                 //setState(state + 1)
                 //SliderUpDown(store.sliderUpDown)
@@ -40,7 +40,7 @@ const ButtonControl = observer(() => {
         }
         if(String(key) == 's' || String(key) == 'S' || String(key) == 'ы' || String(key) == 'Ы'){
             if(store.sliderUpDown > 0) {
-                store.setSliderUpDown(store.sliderUpDown - 1)
+                store.setSliderUpDown(store.sliderUpDown - 5)
                 SliderUpDown(store.sliderUpDown)
             }
             console.log('CMD DOWN: WWWWW ' + store.sliderUpDown);
@@ -71,7 +71,7 @@ const ButtonControl = observer(() => {
                         <input
                             type="range"
                             min="0"
-                            max="40"
+                            max="120"
                             value={store.sliderUpDown}
                             className="form-range"
                             onChange={(event) => {
