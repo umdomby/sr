@@ -18,14 +18,18 @@ class DeviceStore {
         this._delaycommand = 0
         this._ipaddress = 'localhost'
         this._idSocket = ''
-        this._messageLR = 70
+        this._messageL = 70
+        this._messageR = 70
         //this._ipaddress = '192.168.0.107'
         //this._ipaddress = 'wss://cyberbet.online:81'
         makeAutoObservable(this)
     }
 
-    get messageLR() {return this._messageLR;}
-    setMessageLR(value) {this._messageLR = value;}
+    get messageL() {return this._messageL;}
+    setMessageL(value) {this._messageL = value;}
+
+    get messageR() {return this._messageR;}
+    setMessageR(value) {this._messageR = value;}
 
     get idSocket() {return this._idSocket;}
     setIdSocket(value) {this._idSocket = value;}

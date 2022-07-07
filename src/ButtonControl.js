@@ -5,8 +5,9 @@ import {Col, Container, Row} from "react-bootstrap";
 import Demonstration from "./components/Joy/Demonstration"
 //import {ControlSliderUpDown} from "./Control/controlJoy/ControlSliderUpDown";
 import store from "./store/DeviceStore"
-//import messageLR from "./components/messageLR"
-import {messageLR} from "./Control/messageLR";
+//import messageL from "./components/messageL"
+import {messageL} from "./Control/messageL";
+import {messageR} from "./Control/messageR";
 import useEventListener from '@use-it/event-listener'
 
 const ButtonControl = observer(() => {
@@ -23,18 +24,22 @@ const ButtonControl = observer(() => {
     function handler({ key }) {
         //console.log(String(key));
         if(String(key) == 'w' || String(key) == 'W' || String(key) == 'ц' || String(key) == 'Ц') {
-            if(store.messageLR < 117) {
-                store.setMessageLR(store.messageLR + 3)
-                messageLR(store.messageLR, store.messageLR)
+            if(store.messageL < 117) {
+                store.setMessageL(store.messageL + 3)
+                store.setMessageR(store.messageR + 3)
+                messageL(store.messageL)
+                messageR(store.messageR)
             }
-            console.log('CMD DOWN: WWWWW ' + store.messageLR);
+            console.log('CMD DOWN: WWWWW ' + store.messageL);
         }
         if(String(key) == 's' || String(key) == 'S' || String(key) == 'ы' || String(key) == 'Ы'){
-            if(store.messageLR > 0) {
-                store.setMessageLR(store.messageLR - 3)
-                messageLR(store.messageLR, store.messageLR)
+            if(store.messageR > 0) {
+                store.setMessageL(store.messageL - 3)
+                store.setMessageR(store.messageR - 3)
+                messageL(store.messageL)
+                messageR(store.messageR)
             }
-            console.log('CMD DOWN: WWWWW ' + store.messageLR);
+            console.log('CMD DOWN: WWWWW ' + store.messageR);
         }
     }
     useEventListener('keydown', handler);
@@ -46,11 +51,17 @@ const ButtonControl = observer(() => {
 
     //ButtonSliderUpDown(movement.x, movement.y)
 
-    const handleChange = (value) => {
+    const handleChangeMessageL = (value) => {
         //setState(value)
-        store.setMessageLR(Number(value))
-        console.log('SliderUPDown ' + store.messageLR)
-        messageLR(Number(value))
+        store.setMessageL(Number(value))
+        console.log('SliderUPDown ' + store.messageL)
+        messageL(Number(value))
+    }
+    const handleChangeMessageR = (value) => {
+        //setState(value)
+        store.setMessageR(Number(value))
+        console.log('SliderUPDown ' + store.messageR)
+        messageR(Number(value))
     }
 
     return (
@@ -62,29 +73,29 @@ const ButtonControl = observer(() => {
                             type="range"
                             min="0"
                             max="120"
-                            value={store.messageLR}
+                            value={store.messageL}
                             className="form-range"
                             onChange={(event) => {
                                 //localStorage.setItem('localSpeedStateUD', event.target.value)
-                                handleChange(event.target.value)
+                                handleChangeMessageL(event.target.value)
                             }}
                             id="customRange1">
                         </ input>
-                        {store.messageLR}
+                        {store.messageL}
 
                         <input
                             type="range"
                             min="0"
                             max="120"
-                            value={store.messageLR}
+                            value={store.messageR}
                             className="form-range"
                             onChange={(event) => {
                                 //localStorage.setItem('localSpeedStateUD', event.target.value)
-                                handleChange(event.target.value)
+                                handleChangeMessageR(event.target.value)
                             }}
                             id="customRange1">
                         </ input>
-                        {store.messageLR}
+                        {store.messageL}
                     </Col>
                     <Col>
                         {/*<div className="Joy">*/}
