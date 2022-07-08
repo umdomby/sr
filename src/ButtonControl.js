@@ -30,7 +30,7 @@ const ButtonControl = observer(() => {
             console.log('messageOnOff ' + store.messageOnOff)
         }
         if(String(key) == 'w' || String(key) == 'W' || String(key) == 'ц' || String(key) == 'Ц') {
-            if(store.messageL < 117) {
+            if(store.messageL < 117 && store.messageR < 117) {
                 store.setMessageL(store.messageL + 3)
                 store.setMessageR(store.messageR + 3)
                 messageL(store.messageL)
@@ -39,7 +39,7 @@ const ButtonControl = observer(() => {
             console.log('CMD DOWN: WWWWW ' + store.messageL);
         }
         if(String(key) == 's' || String(key) == 'S' || String(key) == 'ы' || String(key) == 'Ы'){
-            if(store.messageR > 0) {
+            if(store.messageR > 2 && store.messageR > 2) {
                 store.setMessageL(store.messageL - 3)
                 store.setMessageR(store.messageR - 3)
                 messageL(store.messageL)
