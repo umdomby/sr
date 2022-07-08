@@ -8,6 +8,7 @@ import store from "./store/DeviceStore"
 //import messageL from "./components/messageL"
 import {messageL} from "./Control/messageL";
 import {messageR} from "./Control/messageR";
+import {messageOnOff} from "./Control/messageOnOff"
 import useEventListener from '@use-it/event-listener'
 
 const ButtonControl = observer(() => {
@@ -22,7 +23,12 @@ const ButtonControl = observer(() => {
     // };
 
     function handler({ key }) {
-        //console.log(String(key));
+        console.log(String(key));
+        if(String(key) == 'Escape') {
+            store.setMessageOnOff(!store.messageOnOff)
+            messageOnOff(store.messageOnOff)
+            console.log('messageOnOff ' + store.messageOnOff)
+        }
         if(String(key) == 'w' || String(key) == 'W' || String(key) == 'ц' || String(key) == 'Ц') {
             if(store.messageL < 117) {
                 store.setMessageL(store.messageL + 3)

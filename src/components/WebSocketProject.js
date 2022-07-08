@@ -39,8 +39,11 @@ const WebSocketProject = (id) => {
                     case "messagesR":
                         console.log("from arduino messageR " + msg.messageR)
                         break
+                    case "messagesOnOff":
+                        console.log("from arduino messageOnOff " + msg.messageOnOff)
+                        break
                     default:
-                        console.log('default ' + msg)
+                        console.log('default')
                 }
             }
         }

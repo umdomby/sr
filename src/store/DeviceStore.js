@@ -20,10 +20,14 @@ class DeviceStore {
         this._idSocket = ''
         this._messageL = 70
         this._messageR = 70
+        this._messageOnOff = false
         //this._ipaddress = '192.168.0.107'
         //this._ipaddress = 'wss://cyberbet.online:81'
         makeAutoObservable(this)
     }
+
+    get messageOnOff() {return this._messageOnOff;}
+    setMessageOnOff(value) {this._messageOnOff = value;}
 
     get messageL() {return this._messageL;}
     setMessageL(value) {this._messageL = value;}
