@@ -1,5 +1,4 @@
 import store from "../store/DeviceStore"
-
 const WebSocketProject = (id) => {
 
     try {
@@ -48,7 +47,7 @@ const WebSocketProject = (id) => {
             }
         }
     }catch (e) {
-        console.log(e)
+        console.log(e + ' no connected')
     }
 
     return ([])

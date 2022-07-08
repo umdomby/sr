@@ -6,6 +6,7 @@ import store from "../store/DeviceStore"
 const ConnectWebSocket = observer(() => {
 
     const [idSocket, setIdSocket] = useState(localStorage.getItem('localIdSocket') || '')
+    setInterval(() => socketTest(), 5000)
 
     useEffect(()=>{
         if( localStorage.getItem('localIdSocket') === null || localStorage.getItem('localIdSocket') === undefined) {
@@ -15,10 +16,20 @@ const ConnectWebSocket = observer(() => {
         setIdSocket(localStorage.getItem('localIdSocket') || '')
         store.setIdSocket(idSocket)
         connectID(idSocket)
+
     },[idSocket])
 
     const connectID = () => {
         WebSocketProject(idSocket)
+    }
+
+    const socketTest = () => {
+        if (store.webSocket.readyState === store.webSocket.CLOSED || store.webSocket.readyState === store.webSocket.CLOSING) {
+            connectID(idSocket)
+            console.log('WebSocket reconnected ' + idSocket)
+        } else {
+            console.log('WebSocket disconnected')
+        }
     }
 
     return (
