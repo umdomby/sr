@@ -17,17 +17,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ButtonControl from "./ButtonControl"
 const App = observer(() => {
 
-    useEffect(()=>{
-        WebSocketProject('123')
-    },[])
+    // useEffect(()=>{
+    //     WebSocketProject('123')
+    // },[])
 
     // const [state, setState] = useState('');
-    const handler = (event) => {
-        // changing the state to the name of the key
-        // which is pressed
-        // setState(event.key);
-        console.log(event.key);
-    };
+    // const handler = (event) => {
+    //     // changing the state to the name of the key
+    //     // which is pressed
+    //     // setState(event.key);
+    //     console.log(event.key);
+    // };
 
     return (
         <div className="App">

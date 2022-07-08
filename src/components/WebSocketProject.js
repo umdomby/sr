@@ -34,13 +34,13 @@ const WebSocketProject = (id) => {
                         console.log(`пользователь ${msg.id} присоединился`)
                         break
                     case "messagesL":
-                        console.log("from arduino messageL " + msg.messageL)
+                        console.log("from server messageL " + msg.messageL)
                         break
                     case "messagesR":
-                        console.log("from arduino messageR " + msg.messageR)
+                        console.log("from server messageR " + msg.messageR)
                         break
                     case "messagesOnOff":
-                        console.log("from arduino messageOnOff " + msg.messageOnOff)
+                        console.log("from server messageOnOff " + msg.messageOnOff)
                         break
                     default:
                         console.log('default')
