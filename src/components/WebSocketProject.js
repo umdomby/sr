@@ -45,10 +45,12 @@ const WebSocketProject = (id) => {
                         console.log("from server messageStop")
                         break
                     case "messagesFBL":
-                        console.log("from server messageFBL")
+                        console.log('From arduino messageFBL ' + msg.messageFBL)
+                        store.setArduinoFBL(msg.messageFBL)
                         break
                     case "messagesFBR":
-                        console.log("from server messageFBR")
+                        console.log('From arduino messageFBR ' + msg.messageFBR)
+                        store.setArduinoFBR(msg.messageFBR)
                         break
                     default:
                         console.log('default')

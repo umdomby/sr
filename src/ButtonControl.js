@@ -155,7 +155,7 @@ const ButtonControl = observer(() => {
             <Container>
                 <Row>
                     <Col>
-                        <label>Вперёд</label>
+                        <div>{store.arduinoFBL ? 'вперед ' : 'назад '} {store.messageL}</div>
                         <input
                             type="range"
                             min="0"
@@ -168,7 +168,7 @@ const ButtonControl = observer(() => {
                             }}
                             id="customRange1">
                         </ input>
-                        {store.messageL}
+
 
                         <input
                             type="range"
@@ -182,7 +182,7 @@ const ButtonControl = observer(() => {
                             }}
                             id="customRange1">
                         </ input>
-                        {store.messageR}
+                        <div>{store.arduinoFBR ? 'вперёд ' : 'назад '} {store.messageR}</div>
                     </Col>
                     <Col>
                         {/*<div className="Joy">*/}
