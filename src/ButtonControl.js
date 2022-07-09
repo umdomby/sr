@@ -21,6 +21,7 @@ const ButtonControl = observer(() => {
     //     // setState(event.key);
     //     // console.log(event.key);
     // };
+    const speed = 37
 
     const FBL = (FBL) => {
         //store.setMessageFBL(FBL)
@@ -101,7 +102,7 @@ const ButtonControl = observer(() => {
                     FBR(true)
                     console.log('messageFBR ' + store.messageFBR)
                 }
-                if (store.messageL < 117 && store.messageR < 117) {
+                if (store.messageL < speed && store.messageR < speed) {
                     store.setMessageL(store.messageL + 3)
                     store.setMessageR(store.messageR + 3)
                     messageL(store.messageL)
@@ -120,7 +121,7 @@ const ButtonControl = observer(() => {
                     FBR(false)
                     console.log('messageFBR ' + store.messageFBR)
                 }
-                if (store.messageL > -117) {
+                if (store.messageL > -speed) {
                     store.setMessageL(store.messageL - 3)
                     store.setMessageR(store.messageR - 3)
                 }
@@ -132,7 +133,7 @@ const ButtonControl = observer(() => {
         if(String(key) === 'a' || String(key) === 'A' || String(key) === 'ф' || String(key) === 'Ф') {
             if(store.reversal == false) {
                 if (store.messageR > 0 && store.messageL > 0) {
-                    if (store.messageR < store.messageL && store.messageL <= 117) {
+                    if (store.messageR < store.messageL && store.messageL <= speed) {
                         store.setMessageR(store.messageR + 3)
                         messageR(store.messageR)
                     } else if (store.messageR > store.messageL) {
@@ -144,7 +145,7 @@ const ButtonControl = observer(() => {
                         messageL(store.messageL)
                     }
                 } else if (store.messageR < 0 && store.messageL < 0) {
-                    if (store.messageR > store.messageL && store.messageL <= 117) {
+                    if (store.messageR > store.messageL && store.messageL <= speed) {
                         store.setMessageR(store.messageR - 3)
                         messageR(store.messageR)
                     } else if (store.messageR < store.messageL) {
@@ -167,7 +168,7 @@ const ButtonControl = observer(() => {
                     FBL(true)
                     FBR(false)
                 }
-                if (store.messageL > -117 && store.messageR < 117) {
+                if (store.messageL > -speed && store.messageR < speed) {
                     store.setMessageR(store.messageR + 3)
                     messageR(store.messageR)
                     store.setMessageL(store.messageL - 3)
@@ -180,7 +181,7 @@ const ButtonControl = observer(() => {
         if(String(key) === 'd' || String(key) === 'D' || String(key) === 'в' || String(key) === 'В'){
             if(store.reversal == false) {
                 if (store.messageR > 0 && store.messageL > 0) {
-                    if (store.messageL < store.messageR && store.messageR <= 117) {
+                    if (store.messageL < store.messageR && store.messageR <= speed) {
                         store.setMessageL(store.messageL + 3)
                         messageL(store.messageL)
                     } else if (store.messageL > store.messageR) {
@@ -191,7 +192,7 @@ const ButtonControl = observer(() => {
                         messageR(store.messageR)
                     }
                 } else if (store.messageR < 0 && store.messageL < 0) {
-                    if (store.messageL > store.messageR && store.messageR <= 117) {
+                    if (store.messageL > store.messageR && store.messageR <= speed) {
                         store.setMessageL(store.messageL - 3)
                         messageL(store.messageL)
                     } else if (store.messageL < store.messageR) {
@@ -214,7 +215,7 @@ const ButtonControl = observer(() => {
                     FBL(false)
                     FBR(true)
                 }
-                if (store.messageR > -117 && store.messageL < 117) {
+                if (store.messageR > -speed && store.messageL < speed) {
                     store.setMessageR(store.messageR - 3)
                     messageR(store.messageR)
                     store.setMessageL(store.messageL + 3)
@@ -252,9 +253,10 @@ const ButtonControl = observer(() => {
             <Container>
                 <Row>
                     <Col>
-                        <div>ON OFF: "Escape"</div>
+                        <div>ON, OFF: "Escape"</div>
                         <div>Тормоз: "Space"</div>
                         <div>Разворот или прямая: "Shift"</div>
+                        <div>Управление: "w  s  a  d"</div>
                     </Col>
                     <Col>
                         <div>{ store.arduinoFBL !== null ?
@@ -264,8 +266,8 @@ const ButtonControl = observer(() => {
                         }{store.messageL} {store.reversal ? ' разворот' : ''}</div>
                         <input
                             type="range"
-                            min="-120"
-                            max="120"
+                            min={-speed}
+                            max={speed}
                             value={store.messageL}
                             className="form-range"
                             onChange={(event) => {
@@ -278,8 +280,8 @@ const ButtonControl = observer(() => {
 
                         <input
                             type="range"
-                            min="-120"
-                            max="120"
+                            min={-speed}
+                            max={speed}
                             value={store.messageR}
                             className="form-range"
                             onChange={(event) => {
