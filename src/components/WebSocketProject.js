@@ -41,6 +41,9 @@ const WebSocketProject = (id) => {
                     case "messagesOnOff":
                         console.log("from server messageOnOff " + msg.messageOnOff)
                         break
+                    case "messagesStop":
+                        console.log("from server messageStop")
+                        break
                     default:
                         console.log('default')
                 }

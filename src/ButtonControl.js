@@ -22,14 +22,34 @@ const ButtonControl = observer(() => {
     //     // console.log(event.key);
     // };
 
-    function handler({ key }) {
+    function handlerUP({ key }) {
+        if(String(key) === ' ') {
+            console.log('Space UP')
+            store.webSocket.send(JSON.stringify({
+                id: store.idSocket,
+                method: 'messagesStop',
+                messageStop: true
+            }))
+        }
+    }
+
+    function handlerDOWN({ key }) {
         console.log(String(key));
-        if(String(key) == 'Escape') {
+
+        if(String(key) === ' ') {
+            store.webSocket.send(JSON.stringify({
+                id: store.idSocket,
+                method: 'messagesStop',
+                messageStop: false
+            }))
+        }
+
+        if(String(key) === 'Escape') {
             store.setMessageOnOff(!store.messageOnOff)
             messageOnOff(store.messageOnOff)
             console.log('messageOnOff ' + store.messageOnOff)
         }
-        if(String(key) == 'w' || String(key) == 'W' || String(key) == 'ц' || String(key) == 'Ц') {
+        if(String(key) === 'w' || String(key) === 'W' || String(key) === 'ц' || String(key) === 'Ц') {
             if(store.messageL < 117 && store.messageR < 117) {
                 store.setMessageL(store.messageL + 3)
                 store.setMessageR(store.messageR + 3)
@@ -38,7 +58,7 @@ const ButtonControl = observer(() => {
             }
             console.log('CMD DOWN: WWWWW ' + store.messageL);
         }
-        if(String(key) == 's' || String(key) == 'S' || String(key) == 'ы' || String(key) == 'Ы'){
+        if(String(key) === 's' || String(key) === 'S' || String(key) === 'ы' || String(key) === 'Ы'){
             if(store.messageR > 2 && store.messageR > 2) {
                 store.setMessageL(store.messageL - 3)
                 store.setMessageR(store.messageR - 3)
@@ -48,7 +68,7 @@ const ButtonControl = observer(() => {
             console.log('CMD DOWN: WWWWW ' + store.messageR);
         }
 
-        if(String(key) == 'a' || String(key) == 'A' || String(key) == 'ф' || String(key) == 'Ф') {
+        if(String(key) === 'a' || String(key) === 'A' || String(key) === 'ф' || String(key) === 'Ф') {
 
             if(store.messageR < store.messageL && store.messageL <= 120){
                 store.setMessageR(store.messageR + 3)
@@ -65,7 +85,7 @@ const ButtonControl = observer(() => {
 
             console.log('CMD DOWN: WWWWW ' + store.messageL);
         }
-        if(String(key) == 'd' || String(key) == 'D' || String(key) == 'в' || String(key) == 'В'){
+        if(String(key) === 'd' || String(key) === 'D' || String(key) === 'в' || String(key) === 'В'){
             if(store.messageL < store.messageR && store.messageR <= 120){
                 store.setMessageL(store.messageL + 3)
                 messageL(store.messageL)
@@ -75,14 +95,15 @@ const ButtonControl = observer(() => {
                 messageR(store.messageR)
             }
 
-            else if(store.messageR == store.messageL){
+            else if(store.messageR === store.messageL){
                 store.setMessageR(store.messageR - 3)
                 messageR(store.messageR)
             }
             console.log('CMD DOWN: WWWWW ' + store.messageR);
         }
     }
-    useEventListener('keydown', handler);
+    useEventListener('keydown', handlerDOWN);
+    useEventListener('keyup', handlerUP);
 
     // window.addEventListener('keydown', function(event) {
     // document.body.addEventListener('keypress', function(event) {

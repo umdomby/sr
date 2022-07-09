@@ -28,7 +28,7 @@ const ConnectWebSocket = observer(() => {
             connectID(idSocket)
             console.log('WebSocket reconnected ' + idSocket)
         } else {
-            console.log('WebSocket disconnected')
+            //console.log('WebSocket connected')
         }
     }
 
