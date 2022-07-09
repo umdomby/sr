@@ -260,7 +260,7 @@ const ButtonControl = observer(() => {
     }
 
     return (
-        <div className="App">
+        <div className="App" >
             <Container>
                 <Row>
                     <Col>

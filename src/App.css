@@ -4,11 +4,11 @@
 
 
 
-video {
-  height: auto;
-  margin-left: auto;
-  margin-right: auto;
-}
+/*video {*/
+/*  height: auto;*/
+/*  margin-left: auto;*/
+/*  margin-right: auto;*/
+/*}*/
 
 @media (max-width: 400px) {
   .App {
@@ -16,6 +16,9 @@ video {
   }
 
   video {
+    width: 100%;
+  }
+  .Panel {
     width: 100%;
   }
   .Joy {
@@ -32,6 +35,9 @@ video {
     /*position: fixed;*/
     width: 100%;
   }
+  .Panel {
+    width: 70%;
+  }
   .Joy {
     /*margin: auto;*/
     /*position: fixed;*/
@@ -44,7 +50,10 @@ video {
     text-align: center;
   }
   video {
-    width: 100%;
+    width: 70%;
+  }
+  .Panel {
+    width: 60%;
   }
   .Joy {
     /*margin: auto;*/
@@ -58,7 +67,10 @@ video {
     text-align: center;
   }
   video {
-    width: 75%;
+    width: 50%;
+  }
+  .Panel {
+    width: 50%;
   }
   .Joy {
     /*margin: auto;*/
