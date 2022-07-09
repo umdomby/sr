@@ -10,8 +10,8 @@ import {observer} from "mobx-react-lite";
 
 import React, {useEffect, useState} from "react";
 import Video from "./components/Video/Video";
-import WebSocketProject from "./components/WebSocketProject";
-import ConnectWebSocket from "./components/ConnectWebSocket";
+//import WebSocketProject from "./components/WebSocketProject";
+//import ConnectWebSocket from "./components/ConnectWebSocket";
 import 'react-rangeslider/lib/index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ButtonControl from "./ButtonControl"
@@ -35,9 +35,7 @@ const App = observer(() => {
                 <Video/>
             </div>
             <ButtonControl/>
-            <div>
-                <ConnectWebSocket/>
-            </div>
+
 
             {/*    /!*<CameraFaceDetect/>*!/*/}
             {/*    /!*<Dictaphone33/>*!/*/}

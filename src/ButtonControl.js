@@ -9,6 +9,7 @@ import store from "./store/DeviceStore"
 import {messageL} from "./Control/messageL";
 import {messageR} from "./Control/messageR";
 import useEventListener from '@use-it/event-listener'
+import ConnectWebSocket from "./components/ConnectWebSocket";
 
 const ButtonControl = observer(() => {
 
@@ -38,30 +39,37 @@ const ButtonControl = observer(() => {
         }))
     }
 
+    function Stop(){
+        store.setMessageL(0)
+        store.setMessageR(0)
+        messageL(0)
+        messageR(0)
+    }
+
     function handlerUP({ key }) {
 
         if(String(key) === 'Shift') {
-            console.log('Shift')
-            FBL(!store.messageFBL)
-            FBR(!store.messageFBR)
-            console.log('messageFBL ' + store.messageFBL)
-            console.log('messageFBR ' + store.messageFBR)
+            Stop()
+            store.setReversal(!store.reversal)
+            console.log('Shift ' + store.reversal)
+            // FBL(!store.messageFBL)
+            // FBR(!store.messageFBR)
+            // console.log('messageFBL ' + store.messageFBL)
+            // console.log('messageFBR ' + store.messageFBR)
         }
 
         if(String(key) === ' ') {
+            Stop()
             console.log('Space UP')
             store.webSocket.send(JSON.stringify({
                 id: store.idSocket,
                 method: 'messagesStop',
                 messageStop: true
             }))
-            store.setMessageL(0)
-            store.setMessageR(0)
-            messageL(0)
-            messageR(0)
         }
 
         if(String(key) === 'Escape') {
+            Stop()
             store.setMessageOnOff(!store.messageOnOff)
             store.webSocket.send(JSON.stringify({
                 id: store.idSocket,
@@ -84,112 +92,134 @@ const ButtonControl = observer(() => {
         }
 
         if(String(key) === 'w' || String(key) === 'W' || String(key) === 'ц' || String(key) === 'Ц') {
-            if(store.messageL > 0){
-                FBL(true)
-                console.log('messageFBL ' + store.messageFBL)
+            if (store.reversal == false) {
+                if (store.messageL > 0) {
+                    FBL(true)
+                    console.log('messageFBL ' + store.messageFBL)
+                }
+                if (store.messageR > 0) {
+                    FBR(true)
+                    console.log('messageFBR ' + store.messageFBR)
+                }
+                if (store.messageL < 117 && store.messageR < 117) {
+                    store.setMessageL(store.messageL + 3)
+                    store.setMessageR(store.messageR + 3)
+                    messageL(store.messageL)
+                    messageR(store.messageR)
+                }
+                console.log('CMD DOWN: WWWWW ' + store.messageL);
             }
-            if(store.messageR > 0){
-                FBR(true)
-                console.log('messageFBR ' + store.messageFBR)
-            }
-            if(store.messageL < 117 && store.messageR < 117) {
-                store.setMessageL(store.messageL + 3)
-                store.setMessageR(store.messageR + 3)
+        }
+        if(String(key) === 's' || String(key) === 'S' || String(key) === 'ы' || String(key) === 'Ы'){
+            if(store.reversal == false) {
+                if (store.messageL < 0) {
+                    FBL(false)
+                    console.log('messageFBL ' + store.messageFBL)
+                }
+                if (store.messageR < 0) {
+                    FBR(false)
+                    console.log('messageFBR ' + store.messageFBR)
+                }
+                if (store.messageL > -117) {
+                    store.setMessageL(store.messageL - 3)
+                    store.setMessageR(store.messageR - 3)
+                }
                 messageL(store.messageL)
                 messageR(store.messageR)
             }
-            console.log('CMD DOWN: WWWWW ' + store.messageL);
-        }
-        if(String(key) === 's' || String(key) === 'S' || String(key) === 'ы' || String(key) === 'Ы'){
-            //if(store.messageR > 2 && store.messageR > 2) {
-
-            if(store.messageL < 0){
-                FBL(false)
-                console.log('messageFBL ' + store.messageFBL)
-            }
-            if(store.messageR < 0){
-                FBR(false)
-                console.log('messageFBR ' + store.messageFBR)
-            }
-            if(store.messageL > -117) {
-                store.setMessageL(store.messageL - 3)
-                store.setMessageR(store.messageR - 3)
-            }
-            messageL(store.messageL)
-            messageR(store.messageR)
-            //}
-            //console.log('CMD DOWN: WWWWW ' + store.messageR);
         }
 
         if(String(key) === 'a' || String(key) === 'A' || String(key) === 'ф' || String(key) === 'Ф') {
-            if(store.messageR > 0 && store.messageL > 0) {
-                if (store.messageR < store.messageL && store.messageL <= 117) {
+            if(store.reversal == false) {
+                if (store.messageR > 0 && store.messageL > 0) {
+                    if (store.messageR < store.messageL && store.messageL <= 117) {
+                        store.setMessageR(store.messageR + 3)
+                        messageR(store.messageR)
+                    } else if (store.messageR > store.messageL) {
+                        store.setMessageL(store.messageL - 3)
+                        messageL(store.messageL)
+                    }
+                    if (store.messageR == store.messageL) {
+                        store.setMessageL(store.messageL - 3)
+                        messageL(store.messageL)
+                    }
+                } else if (store.messageR < 0 && store.messageL < 0) {
+                    if (store.messageR > store.messageL && store.messageL <= 117) {
+                        store.setMessageR(store.messageR - 3)
+                        messageR(store.messageR)
+                    } else if (store.messageR < store.messageL) {
+                        store.setMessageL(store.messageL + 3)
+                        messageL(store.messageL)
+                    } else if (store.messageR == store.messageL) {
+                        store.setMessageL(store.messageL + 3)
+                        messageL(store.messageL)
+                    }
+                } else if (store.messageR == 0 && store.messageL > 0) {
                     store.setMessageR(store.messageR + 3)
                     messageR(store.messageR)
-                } else if (store.messageR > store.messageL) {
-                    store.setMessageL(store.messageL - 3)
-                    messageL(store.messageL)
-                }
-                if(store.messageR == store.messageL) {
-                    store.setMessageL(store.messageL - 3)
-                    messageL(store.messageL)
-                }
-            }
-            else if(store.messageR < 0 && store.messageL < 0){
-                if (store.messageR > store.messageL && store.messageL <= 117) {
+                } else if (store.messageR == 0 && store.messageL < 0) {
                     store.setMessageR(store.messageR - 3)
                     messageR(store.messageR)
-                } else if (store.messageR < store.messageL) {
-                    store.setMessageL(store.messageL + 3)
-                    messageL(store.messageL)
-                } else if (store.messageR == store.messageL) {
-                    store.setMessageL(store.messageL + 3)
-                    messageL(store.messageL)
                 }
             }
-            else if(store.messageR == 0 && store.messageL > 0) {
-                store.setMessageR(store.messageR + 3)
-                messageR(store.messageR)
-            }
-            else if(store.messageR == 0 && store.messageL < 0) {
-                store.setMessageR(store.messageR - 3)
-                messageR(store.messageR)
+            else if(store.reversal == true){
+                if(store.messageL < 0 && store.messageR > 0){
+                    FBL(true)
+                    FBR(false)
+                }
+                if (store.messageL > -117 && store.messageR < 117) {
+                    store.setMessageR(store.messageR + 3)
+                    messageR(store.messageR)
+                    store.setMessageL(store.messageL - 3)
+                    messageL(store.messageL)
+                }
             }
 
             console.log('CMD DOWN: WWWWW ' + store.messageL);
         }
         if(String(key) === 'd' || String(key) === 'D' || String(key) === 'в' || String(key) === 'В'){
-            if(store.messageR > 0 && store.messageL > 0) {
-                if (store.messageL < store.messageR && store.messageR <= 117) {
+            if(store.reversal == false) {
+                if (store.messageR > 0 && store.messageL > 0) {
+                    if (store.messageL < store.messageR && store.messageR <= 117) {
+                        store.setMessageL(store.messageL + 3)
+                        messageL(store.messageL)
+                    } else if (store.messageL > store.messageR) {
+                        store.setMessageR(store.messageR - 3)
+                        messageR(store.messageR)
+                    } else if (store.messageR === store.messageL) {
+                        store.setMessageR(store.messageR - 3)
+                        messageR(store.messageR)
+                    }
+                } else if (store.messageR < 0 && store.messageL < 0) {
+                    if (store.messageL > store.messageR && store.messageR <= 117) {
+                        store.setMessageL(store.messageL - 3)
+                        messageL(store.messageL)
+                    } else if (store.messageL < store.messageR) {
+                        store.setMessageR(store.messageR + 3)
+                        messageR(store.messageR)
+                    } else if (store.messageR === store.messageL) {
+                        store.setMessageR(store.messageR + 3)
+                        messageR(store.messageR)
+                    }
+                } else if (store.messageL == 0 && store.messageR > 0) {
                     store.setMessageL(store.messageL + 3)
                     messageL(store.messageL)
-                } else if (store.messageL > store.messageR) {
-                    store.setMessageR(store.messageR - 3)
-                    messageR(store.messageR)
-                } else if (store.messageR === store.messageL) {
-                    store.setMessageR(store.messageR - 3)
-                    messageR(store.messageR)
-                }
-            }
-            else if(store.messageR < 0 && store.messageL < 0) {
-                if (store.messageL > store.messageR && store.messageR <= 117) {
+                } else if (store.messageL == 0 && store.messageR < 0) {
                     store.setMessageL(store.messageL - 3)
                     messageL(store.messageL)
-                } else if (store.messageL < store.messageR) {
-                    store.setMessageR(store.messageR + 3)
-                    messageR(store.messageR)
-                } else if (store.messageR === store.messageL) {
-                    store.setMessageR(store.messageR + 3)
-                    messageR(store.messageR)
                 }
             }
-            else if(store.messageL == 0 && store.messageR > 0) {
-                store.setMessageL(store.messageL + 3)
-                messageL(store.messageL)
-            }
-            else if(store.messageL == 0 && store.messageR < 0) {
-                store.setMessageL(store.messageL - 3)
-                messageL(store.messageL)
+            else if(store.reversal == true){
+                if(store.messageL > 0 && store.messageR < 0) {
+                    FBL(false)
+                    FBR(true)
+                }
+                if (store.messageR > -117 && store.messageL < 117) {
+                    store.setMessageR(store.messageR - 3)
+                    messageR(store.messageR)
+                    store.setMessageL(store.messageL + 3)
+                    messageL(store.messageL)
+                }
             }
             console.log('CMD DOWN: WWWWW ' + store.messageR);
         }
@@ -222,11 +252,16 @@ const ButtonControl = observer(() => {
             <Container>
                 <Row>
                     <Col>
+                        <div>ON OFF: "Escape"</div>
+                        <div>Тормоз: "Space"</div>
+                        <div>Разворот или прямая: "Shift"</div>
+                    </Col>
+                    <Col>
                         <div>{ store.arduinoFBL !== null ?
                             store.arduinoFBL ? 'вперед ' : 'назад '
                             :
-                            ''
-                        }{store.messageL}</div>
+                            '...'
+                        }{store.messageL} {store.reversal ? ' разворот' : ''}</div>
                         <input
                             type="range"
                             min="-120"
@@ -256,17 +291,17 @@ const ButtonControl = observer(() => {
                         <div>{ store.arduinoFBR !== null ?
                             store.arduinoFBR ? 'вперед ' : 'назад '
                             :
-                            ''
-                        }{store.messageR}</div>
-                    </Col>
-                    <Col>
+                            '...'
+                        }{store.messageR}{store.reversal ? ' разворот' : ''}</div>
                         {/*<div className="Joy">*/}
                         {/*    <Demonstration/>*/}
                             {/*<input style={{width:'20%', backgroundColor:'black'}} type="text" value="" onKeyPress={(e) => handler(e)} />*/}
                         {/*</div>*/}
                     </Col>
                     <Col>
-
+                        <div>
+                            <ConnectWebSocket/>
+                        </div>
                     </Col>
                 </Row>
             </Container>

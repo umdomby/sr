@@ -25,6 +25,7 @@ class DeviceStore {
         this._messageFBR = true
         this._arduinoFBL = null
         this._arduinoFBR = null
+        this._reversal = false
         // this._messageStop = true
         //this._ipaddress = '192.168.0.107'
         //this._ipaddress = 'wss://cyberbet.online:81'
@@ -32,6 +33,9 @@ class DeviceStore {
     }
     // get messageStop() {return this._messageStop;}
     // setMessageStop(value) {this._messageStop = value;}
+    get reversal() {return this._reversal;}
+    setReversal(value) {this._reversal = value;}
+
     get arduinoFBL() {return this._arduinoFBL;}
     setArduinoFBL(value) {this._arduinoFBL = value;}
 
