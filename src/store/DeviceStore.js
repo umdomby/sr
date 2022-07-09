@@ -20,7 +20,9 @@ class DeviceStore {
         this._idSocket = ''
         this._messageL = 70
         this._messageR = 70
-        this._messageOnOff = false
+        this._messageOnOff = true
+        this._messageFBL = true
+        this._messageFBR = true
         // this._messageStop = true
         //this._ipaddress = '192.168.0.107'
         //this._ipaddress = 'wss://cyberbet.online:81'
@@ -28,6 +30,12 @@ class DeviceStore {
     }
     // get messageStop() {return this._messageStop;}
     // setMessageStop(value) {this._messageStop = value;}
+
+    get messageFBL() {return this._messageFBL;}
+    setMessageFBL(value) {this._messageFBL = value;}
+
+    get messageFBR() {return this._messageFBR;}
+    setMessageFBR(value) {this._messageFBR = value;}
 
     get messageOnOff() {return this._messageOnOff;}
     setMessageOnOff(value) {this._messageOnOff = value;}
