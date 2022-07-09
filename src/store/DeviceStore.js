@@ -18,8 +18,8 @@ class DeviceStore {
         this._delaycommand = 0
         this._ipaddress = 'localhost'
         this._idSocket = ''
-        this._messageL = 70
-        this._messageR = 70
+        this._messageL = 0
+        this._messageR = 0
         this._messageOnOff = true
         this._messageFBL = true
         this._messageFBR = true

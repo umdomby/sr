@@ -21,24 +21,29 @@ const ButtonControl = observer(() => {
     //     // console.log(event.key);
     // };
 
+    const FBL = (FBL) => {
+        //store.setMessageFBL(FBL)
+        store.webSocket.send(JSON.stringify({
+            id: store.idSocket,
+            method: 'messagesFBL',
+            messageFBL: FBL
+        }))
+    }
+    const FBR = (FBR) => {
+        //store.setMessageFBR(FBR)
+        store.webSocket.send(JSON.stringify({
+            id: store.idSocket,
+            method: 'messagesFBR',
+            messageFBR: FBR
+        }))
+    }
+
     function handlerUP({ key }) {
 
         if(String(key) === 'Shift') {
             console.log('Shift')
-            store.setMessageFBL(!store.messageFBL)
-            store.setMessageFBR(!store.messageFBR)
-
-            store.webSocket.send(JSON.stringify({
-                id: store.idSocket,
-                method: 'messagesFBL',
-                messageFBL: store.messageFBL
-            }))
-            store.webSocket.send(JSON.stringify({
-                id: store.idSocket,
-                method: 'messagesFBR',
-                messageFBR: store.messageFBR
-            }))
-
+            FBL(!store.messageFBL)
+            FBR(!store.messageFBR)
             console.log('messageFBL ' + store.messageFBL)
             console.log('messageFBR ' + store.messageFBR)
         }
@@ -50,6 +55,10 @@ const ButtonControl = observer(() => {
                 method: 'messagesStop',
                 messageStop: true
             }))
+            store.setMessageL(0)
+            store.setMessageR(0)
+            messageL(0)
+            messageR(0)
         }
 
         if(String(key) === 'Escape') {
@@ -75,6 +84,14 @@ const ButtonControl = observer(() => {
         }
 
         if(String(key) === 'w' || String(key) === 'W' || String(key) === 'ц' || String(key) === 'Ц') {
+            if(store.messageL > 0){
+                FBL(true)
+                console.log('messageFBL ' + store.messageFBL)
+            }
+            if(store.messageR > 0){
+                FBR(true)
+                console.log('messageFBR ' + store.messageFBR)
+            }
             if(store.messageL < 117 && store.messageR < 117) {
                 store.setMessageL(store.messageL + 3)
                 store.setMessageR(store.messageR + 3)
@@ -84,45 +101,95 @@ const ButtonControl = observer(() => {
             console.log('CMD DOWN: WWWWW ' + store.messageL);
         }
         if(String(key) === 's' || String(key) === 'S' || String(key) === 'ы' || String(key) === 'Ы'){
-            if(store.messageR > 2 && store.messageR > 2) {
+            //if(store.messageR > 2 && store.messageR > 2) {
+
+            if(store.messageL < 0){
+                FBL(false)
+                console.log('messageFBL ' + store.messageFBL)
+            }
+            if(store.messageR < 0){
+                FBR(false)
+                console.log('messageFBR ' + store.messageFBR)
+            }
+            if(store.messageL > -117) {
                 store.setMessageL(store.messageL - 3)
                 store.setMessageR(store.messageR - 3)
-                messageL(store.messageL)
-                messageR(store.messageR)
             }
-            console.log('CMD DOWN: WWWWW ' + store.messageR);
+            messageL(store.messageL)
+            messageR(store.messageR)
+            //}
+            //console.log('CMD DOWN: WWWWW ' + store.messageR);
         }
 
         if(String(key) === 'a' || String(key) === 'A' || String(key) === 'ф' || String(key) === 'Ф') {
-
-            if(store.messageR < store.messageL && store.messageL <= 120){
+            if(store.messageR > 0 && store.messageL > 0) {
+                if (store.messageR < store.messageL && store.messageL <= 117) {
+                    store.setMessageR(store.messageR + 3)
+                    messageR(store.messageR)
+                } else if (store.messageR > store.messageL) {
+                    store.setMessageL(store.messageL - 3)
+                    messageL(store.messageL)
+                }
+                if(store.messageR == store.messageL) {
+                    store.setMessageL(store.messageL - 3)
+                    messageL(store.messageL)
+                }
+            }
+            else if(store.messageR < 0 && store.messageL < 0){
+                if (store.messageR > store.messageL && store.messageL <= 117) {
+                    store.setMessageR(store.messageR - 3)
+                    messageR(store.messageR)
+                } else if (store.messageR < store.messageL) {
+                    store.setMessageL(store.messageL + 3)
+                    messageL(store.messageL)
+                } else if (store.messageR == store.messageL) {
+                    store.setMessageL(store.messageL + 3)
+                    messageL(store.messageL)
+                }
+            }
+            else if(store.messageR == 0 && store.messageL > 0) {
                 store.setMessageR(store.messageR + 3)
                 messageR(store.messageR)
             }
-            else if(store.messageR > store.messageL){
-                store.setMessageL(store.messageL - 3)
-                messageL(store.messageL)
-            }
-            else if(store.messageR == store.messageL){
-                store.setMessageL(store.messageL - 3)
-                messageL(store.messageL)
+            else if(store.messageR == 0 && store.messageL < 0) {
+                store.setMessageR(store.messageR - 3)
+                messageR(store.messageR)
             }
 
             console.log('CMD DOWN: WWWWW ' + store.messageL);
         }
         if(String(key) === 'd' || String(key) === 'D' || String(key) === 'в' || String(key) === 'В'){
-            if(store.messageL < store.messageR && store.messageR <= 120){
+            if(store.messageR > 0 && store.messageL > 0) {
+                if (store.messageL < store.messageR && store.messageR <= 117) {
+                    store.setMessageL(store.messageL + 3)
+                    messageL(store.messageL)
+                } else if (store.messageL > store.messageR) {
+                    store.setMessageR(store.messageR - 3)
+                    messageR(store.messageR)
+                } else if (store.messageR === store.messageL) {
+                    store.setMessageR(store.messageR - 3)
+                    messageR(store.messageR)
+                }
+            }
+            else if(store.messageR < 0 && store.messageL < 0) {
+                if (store.messageL > store.messageR && store.messageR <= 117) {
+                    store.setMessageL(store.messageL - 3)
+                    messageL(store.messageL)
+                } else if (store.messageL < store.messageR) {
+                    store.setMessageR(store.messageR + 3)
+                    messageR(store.messageR)
+                } else if (store.messageR === store.messageL) {
+                    store.setMessageR(store.messageR + 3)
+                    messageR(store.messageR)
+                }
+            }
+            else if(store.messageL == 0 && store.messageR > 0) {
                 store.setMessageL(store.messageL + 3)
                 messageL(store.messageL)
             }
-            else if(store.messageL > store.messageR){
-                store.setMessageR(store.messageR - 3)
-                messageR(store.messageR)
-            }
-
-            else if(store.messageR === store.messageL){
-                store.setMessageR(store.messageR - 3)
-                messageR(store.messageR)
+            else if(store.messageL == 0 && store.messageR < 0) {
+                store.setMessageL(store.messageL - 3)
+                messageL(store.messageL)
             }
             console.log('CMD DOWN: WWWWW ' + store.messageR);
         }
@@ -155,10 +222,14 @@ const ButtonControl = observer(() => {
             <Container>
                 <Row>
                     <Col>
-                        <div>{store.arduinoFBL ? 'вперед ' : 'назад '} {store.messageL}</div>
+                        <div>{ store.arduinoFBL !== null ?
+                            store.arduinoFBL ? 'вперед ' : 'назад '
+                            :
+                            ''
+                        }{store.messageL}</div>
                         <input
                             type="range"
-                            min="0"
+                            min="-120"
                             max="120"
                             value={store.messageL}
                             className="form-range"
@@ -172,7 +243,7 @@ const ButtonControl = observer(() => {
 
                         <input
                             type="range"
-                            min="0"
+                            min="-120"
                             max="120"
                             value={store.messageR}
                             className="form-range"
@@ -182,7 +253,11 @@ const ButtonControl = observer(() => {
                             }}
                             id="customRange1">
                         </ input>
-                        <div>{store.arduinoFBR ? 'вперёд ' : 'назад '} {store.messageR}</div>
+                        <div>{ store.arduinoFBR !== null ?
+                            store.arduinoFBR ? 'вперед ' : 'назад '
+                            :
+                            ''
+                        }{store.messageR}</div>
                     </Col>
                     <Col>
                         {/*<div className="Joy">*/}
