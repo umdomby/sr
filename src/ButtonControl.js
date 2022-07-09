@@ -71,7 +71,18 @@ const ButtonControl = observer(() => {
 
         if(String(key) === 'Escape') {
             Stop()
-            store.setMessageOnOff(!store.messageOnOff)
+            store.setMessageOnOff(true)
+            store.webSocket.send(JSON.stringify({
+                id: store.idSocket,
+                method: 'messagesOnOff',
+                messageOnOff: store.messageOnOff
+            }))
+            console.log('messageOnOff ' + store.messageOnOff)
+        }
+
+        if(String(key) === 'Enter') {
+            Stop()
+            store.setMessageOnOff(false)
             store.webSocket.send(JSON.stringify({
                 id: store.idSocket,
                 method: 'messagesOnOff',
@@ -253,7 +264,8 @@ const ButtonControl = observer(() => {
             <Container>
                 <Row>
                     <Col>
-                        <div>ON, OFF: "Escape"</div>
+                        <div>ON: "Enter" </div>
+                        <div>OFF: "Escape" </div>
                         <div>Тормоз: "Space"</div>
                         <div>Разворот или прямая: "Shift"</div>
                         <div>Управление: "w  s  a  d"</div>
@@ -295,6 +307,10 @@ const ButtonControl = observer(() => {
                             :
                             '...'
                         }{store.messageR}{store.reversal ? ' разворот' : ''}</div>
+                        <div>{ store.arduinoOnOff !== null ?
+                            store.arduinoOnOff ? 'OFF ' : 'ON '
+                            :
+                            '...'}</div>
                         {/*<div className="Joy">*/}
                         {/*    <Demonstration/>*/}
                             {/*<input style={{width:'20%', backgroundColor:'black'}} type="text" value="" onKeyPress={(e) => handler(e)} />*/}
