@@ -119,6 +119,7 @@ const ButtonControl = observer(() => {
                     messageL(store.messageL)
                     messageR(store.messageR)
                 }
+                console.log('CMD DOWN: WWWWW ' + store.messageL);
             }
         }
         if(String(key) === 's' || String(key) === 'S' || String(key) === 'ы' || String(key) === 'Ы'){
@@ -141,69 +142,98 @@ const ButtonControl = observer(() => {
         }
 
         if(String(key) === 'a' || String(key) === 'A' || String(key) === 'ф' || String(key) === 'Ф') {
-
-            if(store.reversal === false) {
-                // if (store.messageL < 0) {
-                //     FBL(false)
-                //     console.log('messageFBL ' + store.messageFBL)
-                // }
-                // if (store.messageR < 0) {
-                //     FBR(false)
-                //     console.log('messageFBR ' + store.messageFBR)
-                // }
-                if (store.messageL > -speed) {
+            if(store.reversal == false) {
+                if (store.messageR > 0 && store.messageL > 0) {
+                    if (store.messageR < store.messageL && store.messageL <= speed) {
+                        store.setMessageR(store.messageR + 1)
+                        messageR(store.messageR)
+                    } else if (store.messageR > store.messageL) {
+                        store.setMessageL(store.messageL - 1)
+                        messageL(store.messageL)
+                    }
+                    if (store.messageR === store.messageL) {
+                        store.setMessageL(store.messageL - 1)
+                        messageL(store.messageL)
+                    }
+                } else if (store.messageR < 0 && store.messageL < 0) {
+                    if (store.messageR > store.messageL && store.messageL <= speed) {
+                        store.setMessageR(store.messageR - 1)
+                        messageR(store.messageR)
+                    } else if (store.messageR < store.messageL) {
+                        store.setMessageL(store.messageL + 1)
+                        messageL(store.messageL)
+                    } else if (store.messageR === store.messageL) {
+                        store.setMessageL(store.messageL + 1)
+                        messageL(store.messageL)
+                    }
+                } else if (store.messageR === 0 && store.messageL > 0) {
+                    store.setMessageR(store.messageR + 1)
+                    messageR(store.messageR)
+                } else if (store.messageR === 0 && store.messageL < 0) {
+                    store.setMessageR(store.messageR - 1)
+                    messageR(store.messageR)
+                }
+            }
+            else if(store.reversal === true){
+                if(store.messageL < 0 && store.messageR > 0){
                     FBL(true)
+                    FBR(false)
+                }
+                if (store.messageL > -speed && store.messageR < speed) {
+                    store.setMessageR(store.messageR + 1)
+                    messageR(store.messageR)
                     store.setMessageL(store.messageL - 1)
                     messageL(store.messageL)
                 }
-
             }
 
-            // if(store.reversal === true){
-            //     if(store.messageL < 0 && store.messageR > 0){
-            //         FBL(true)
-            //         FBR(false)
-            //     }
-            //     if (store.messageL > -speed && store.messageR < speed) {
-            //         store.setMessageR(store.messageR + 1)
-            //         messageR(store.messageR)
-            //         store.setMessageL(store.messageL - 1)
-            //         messageL(store.messageL)
-            //     }
-            // }
+            console.log('CMD DOWN: WWWWW ' + store.messageL);
         }
-
         if(String(key) === 'd' || String(key) === 'D' || String(key) === 'в' || String(key) === 'В'){
-            if (store.reversal === false) {
-                if (store.messageL >= -speed && store.messageL < 0) {
-                    FBL(true)
+            if(store.reversal === false) {
+                if (store.messageR > 0 && store.messageL > 0) {
+                    if (store.messageL < store.messageR && store.messageR <= speed) {
+                        store.setMessageL(store.messageL + 1)
+                        messageL(store.messageL)
+                    } else if (store.messageL > store.messageR) {
+                        store.setMessageR(store.messageR - 1)
+                        messageR(store.messageR)
+                    } else if (store.messageR === store.messageL) {
+                        store.setMessageR(store.messageR - 1)
+                        messageR(store.messageR)
+                    }
+                } else if (store.messageR < 0 && store.messageL < 0) {
+                    if (store.messageL > store.messageR && store.messageR <= speed) {
+                        store.setMessageL(store.messageL - 1)
+                        messageL(store.messageL)
+                    } else if (store.messageL < store.messageR) {
+                        store.setMessageR(store.messageR + 1)
+                        messageR(store.messageR)
+                    } else if (store.messageR === store.messageL) {
+                        store.setMessageR(store.messageR + 1)
+                        messageR(store.messageR)
+                    }
+                } else if (store.messageL === 0 && store.messageR > 0) {
+                    store.setMessageL(store.messageL + 1)
+                    messageL(store.messageL)
+                } else if (store.messageL === 0 && store.messageR < 0) {
+                    store.setMessageL(store.messageL - 1)
+                    messageL(store.messageL)
+                }
+            }
+            else if(store.reversal === true){
+                if(store.messageL > 0 && store.messageR < 0) {
+                    FBL(false)
+                    FBR(true)
+                }
+                if (store.messageR > -speed && store.messageL < speed) {
+                    store.setMessageR(store.messageR - 1)
+                    messageR(store.messageR)
                     store.setMessageL(store.messageL + 1)
                     messageL(store.messageL)
                 }
-                // if (store.messageR > 0) {
-                //     FBR(true)
-                //
-                // }
-                // if (store.messageL < speed && store.messageR < speed) {
-                //     store.setMessageR(store.messageR + 1)
-                //     messageR(store.messageR)
-                // }
             }
-
-
-            // if(store.reversal === true){
-            //     if(store.messageL > 0 && store.messageR < 0) {
-            //         FBL(false)
-            //         FBR(true)
-            //     }
-            //     if (store.messageR > -speed && store.messageL < speed) {
-            //         store.setMessageR(store.messageR - 1)
-            //         messageR(store.messageR)
-            //         store.setMessageL(store.messageL + 1)
-            //         messageL(store.messageL)
-            //     }
-            // }
-
+            console.log('CMD DOWN: WWWWW ' + store.messageR);
         }
     }
     useEventListener('keydown', handlerDOWN);
@@ -298,4 +328,3 @@ const ButtonControl = observer(() => {
 });
 
 export default ButtonControl;
-
