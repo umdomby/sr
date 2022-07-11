@@ -21,7 +21,7 @@ const ButtonControl = observer(() => {
     //     // setState(event.key);
     //     // console.log(event.key);
     // };
-    const speed = 37
+    const speed = 10
 
     const FBL = (FBL) => {
         //store.setMessageFBL(FBL)
@@ -114,8 +114,8 @@ const ButtonControl = observer(() => {
                     console.log('messageFBR ' + store.messageFBR)
                 }
                 if (store.messageL < speed && store.messageR < speed) {
-                    store.setMessageL(store.messageL + 3)
-                    store.setMessageR(store.messageR + 3)
+                    store.setMessageL(store.messageL + 1)
+                    store.setMessageR(store.messageR + 1)
                     messageL(store.messageL)
                     messageR(store.messageR)
                 }
@@ -133,8 +133,8 @@ const ButtonControl = observer(() => {
                     console.log('messageFBR ' + store.messageFBR)
                 }
                 if (store.messageL > -speed) {
-                    store.setMessageL(store.messageL - 3)
-                    store.setMessageR(store.messageR - 3)
+                    store.setMessageL(store.messageL - 1)
+                    store.setMessageR(store.messageR - 1)
                 }
                 messageL(store.messageL)
                 messageR(store.messageR)
@@ -145,32 +145,32 @@ const ButtonControl = observer(() => {
             if(store.reversal == false) {
                 if (store.messageR > 0 && store.messageL > 0) {
                     if (store.messageR < store.messageL && store.messageL <= speed) {
-                        store.setMessageR(store.messageR + 3)
+                        store.setMessageR(store.messageR + 1)
                         messageR(store.messageR)
                     } else if (store.messageR > store.messageL) {
-                        store.setMessageL(store.messageL - 3)
+                        store.setMessageL(store.messageL - 1)
                         messageL(store.messageL)
                     }
                     if (store.messageR == store.messageL) {
-                        store.setMessageL(store.messageL - 3)
+                        store.setMessageL(store.messageL - 1)
                         messageL(store.messageL)
                     }
                 } else if (store.messageR < 0 && store.messageL < 0) {
                     if (store.messageR > store.messageL && store.messageL <= speed) {
-                        store.setMessageR(store.messageR - 3)
+                        store.setMessageR(store.messageR - 1)
                         messageR(store.messageR)
                     } else if (store.messageR < store.messageL) {
-                        store.setMessageL(store.messageL + 3)
+                        store.setMessageL(store.messageL + 1)
                         messageL(store.messageL)
                     } else if (store.messageR == store.messageL) {
-                        store.setMessageL(store.messageL + 3)
+                        store.setMessageL(store.messageL + 1)
                         messageL(store.messageL)
                     }
                 } else if (store.messageR == 0 && store.messageL > 0) {
-                    store.setMessageR(store.messageR + 3)
+                    store.setMessageR(store.messageR + 1)
                     messageR(store.messageR)
                 } else if (store.messageR == 0 && store.messageL < 0) {
-                    store.setMessageR(store.messageR - 3)
+                    store.setMessageR(store.messageR - 1)
                     messageR(store.messageR)
                 }
             }
@@ -180,9 +180,9 @@ const ButtonControl = observer(() => {
                     FBR(false)
                 }
                 if (store.messageL > -speed && store.messageR < speed) {
-                    store.setMessageR(store.messageR + 3)
+                    store.setMessageR(store.messageR + 1)
                     messageR(store.messageR)
-                    store.setMessageL(store.messageL - 3)
+                    store.setMessageL(store.messageL - 1)
                     messageL(store.messageL)
                 }
             }
@@ -193,31 +193,31 @@ const ButtonControl = observer(() => {
             if(store.reversal == false) {
                 if (store.messageR > 0 && store.messageL > 0) {
                     if (store.messageL < store.messageR && store.messageR <= speed) {
-                        store.setMessageL(store.messageL + 3)
+                        store.setMessageL(store.messageL + 1)
                         messageL(store.messageL)
                     } else if (store.messageL > store.messageR) {
-                        store.setMessageR(store.messageR - 3)
+                        store.setMessageR(store.messageR - 1)
                         messageR(store.messageR)
                     } else if (store.messageR === store.messageL) {
-                        store.setMessageR(store.messageR - 3)
+                        store.setMessageR(store.messageR - 1)
                         messageR(store.messageR)
                     }
                 } else if (store.messageR < 0 && store.messageL < 0) {
                     if (store.messageL > store.messageR && store.messageR <= speed) {
-                        store.setMessageL(store.messageL - 3)
+                        store.setMessageL(store.messageL - 1)
                         messageL(store.messageL)
                     } else if (store.messageL < store.messageR) {
-                        store.setMessageR(store.messageR + 3)
+                        store.setMessageR(store.messageR + 1)
                         messageR(store.messageR)
                     } else if (store.messageR === store.messageL) {
-                        store.setMessageR(store.messageR + 3)
+                        store.setMessageR(store.messageR + 1)
                         messageR(store.messageR)
                     }
                 } else if (store.messageL == 0 && store.messageR > 0) {
-                    store.setMessageL(store.messageL + 3)
+                    store.setMessageL(store.messageL + 1)
                     messageL(store.messageL)
                 } else if (store.messageL == 0 && store.messageR < 0) {
-                    store.setMessageL(store.messageL - 3)
+                    store.setMessageL(store.messageL - 1)
                     messageL(store.messageL)
                 }
             }
@@ -227,9 +227,9 @@ const ButtonControl = observer(() => {
                     FBR(true)
                 }
                 if (store.messageR > -speed && store.messageL < speed) {
-                    store.setMessageR(store.messageR - 3)
+                    store.setMessageR(store.messageR - 1)
                     messageR(store.messageR)
-                    store.setMessageL(store.messageL + 3)
+                    store.setMessageL(store.messageL + 1)
                     messageL(store.messageL)
                 }
             }
