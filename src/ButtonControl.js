@@ -21,7 +21,7 @@ const ButtonControl = observer(() => {
     //     // setState(event.key);
     //     // console.log(event.key);
     // };
-    const speed = 10
+    const speed = 3
 
     const FBL = (FBL) => {
         //store.setMessageFBL(FBL)
@@ -103,6 +103,31 @@ const ButtonControl = observer(() => {
             }))
         }
 
+        if(String(key) === 'a' || String(key) === 'A' || String(key) === 'ф' || String(key) === 'Ф') {
+                if(store.messageL < 0 && store.messageR > 0){
+                    FBL(true)
+                    FBR(false)
+                }
+                if (store.messageL > -speed && store.messageR < speed) {
+                    store.setMessageR(store.messageR + 1)
+                    messageR(store.messageR)
+                    store.setMessageL(store.messageL - 1)
+                    messageL(store.messageL)
+                }
+        }
+        if(String(key) === 'd' || String(key) === 'D' || String(key) === 'в' || String(key) === 'В'){
+                if(store.messageL > 0 && store.messageR < 0) {
+                    FBL(false)
+                    FBR(true)
+                }
+                if (store.messageR > -speed && store.messageL < speed) {
+                    store.setMessageR(store.messageR - 1)
+                    messageR(store.messageR)
+                    store.setMessageL(store.messageL + 1)
+                    messageL(store.messageL)
+                }
+        }
+
         if(String(key) === 'w' || String(key) === 'W' || String(key) === 'ц' || String(key) === 'Ц') {
             if (store.reversal === false) {
                 if (store.messageL > 0) {
@@ -140,26 +165,39 @@ const ButtonControl = observer(() => {
             }
         }
 
-        if(String(key) === 'a' || String(key) === 'A' || String(key) === 'ф' || String(key) === 'Ф') {
-
-            if(store.reversal === false) {
-                // if (store.messageL < 0) {
-                //     FBL(false)
-                //     console.log('messageFBL ' + store.messageFBL)
-                // }
-                // if (store.messageR < 0) {
-                //     FBR(false)
-                //     console.log('messageFBR ' + store.messageFBR)
-                // }
-                if (store.messageL > -speed) {
-                    FBL(true)
-                    store.setMessageL(store.messageL - 1)
-                    messageL(store.messageL)
+        if(String(key) === 'e' || String(key) === 'E' || String(key) === 'у' || String(key) === 'У') {
+            //if(store.reversal == false) {
+                if (store.messageR > 0 && store.messageL > 0) {
+                    if (store.messageR < store.messageL && store.messageL <= speed) {
+                        store.setMessageR(store.messageR + 1)
+                        messageR(store.messageR)
+                    } else if (store.messageR > store.messageL) {
+                        store.setMessageL(store.messageL - 1)
+                        messageL(store.messageL)
+                    } else if (store.messageR === store.messageL) {
+                        store.setMessageL(store.messageL - 1)
+                        messageL(store.messageL)
+                    }
+                } else if (store.messageR < 0 && store.messageL < 0) {
+                    if (store.messageR > store.messageL && store.messageL <= speed) {
+                        store.setMessageR(store.messageR - 1)
+                        messageR(store.messageR)
+                    } else if (store.messageR < store.messageL) {
+                        store.setMessageL(store.messageL + 1)
+                        messageL(store.messageL)
+                    } else if (store.messageR === store.messageL) {
+                        store.setMessageL(store.messageL + 1)
+                        messageL(store.messageL)
+                    }
+                } else if (store.messageR === 0 && store.messageL > 0) {
+                    store.setMessageR(store.messageR + 1)
+                    messageR(store.messageR)
+                } else if (store.messageR === 0 && store.messageL < 0) {
+                    store.setMessageR(store.messageR - 1)
+                    messageR(store.messageR)
                 }
-
-            }
-
-            // if(store.reversal === true){
+            // }
+            // else if(store.reversal === true){
             //     if(store.messageL < 0 && store.messageR > 0){
             //         FBL(true)
             //         FBR(false)
@@ -171,27 +209,42 @@ const ButtonControl = observer(() => {
             //         messageL(store.messageL)
             //     }
             // }
-        }
 
-        if(String(key) === 'd' || String(key) === 'D' || String(key) === 'в' || String(key) === 'В'){
-            if (store.reversal === false) {
-                if (store.messageL >= -speed && store.messageL < 0) {
-                    FBL(true)
+            console.log('CMD DOWN: WWWWW ' + store.messageL);
+        }
+        if(String(key) === 'q' || String(key) === 'Q' || String(key) === 'й' || String(key) === 'Й'){
+            //if(store.reversal === false) {
+                if (store.messageR > 0 && store.messageL > 0) {
+                    if (store.messageL < store.messageR && store.messageR <= speed) {
+                        store.setMessageL(store.messageL + 1)
+                        messageL(store.messageL)
+                    } else if (store.messageL > store.messageR) {
+                        store.setMessageR(store.messageR - 1)
+                        messageR(store.messageR)
+                    } else if (store.messageR === store.messageL) {
+                        store.setMessageR(store.messageR - 1)
+                        messageR(store.messageR)
+                    }
+                } else if (store.messageR < 0 && store.messageL < 0) {
+                    if (store.messageL > store.messageR && store.messageR <= speed) {
+                        store.setMessageL(store.messageL - 1)
+                        messageL(store.messageL)
+                    } else if (store.messageL < store.messageR) {
+                        store.setMessageR(store.messageR + 1)
+                        messageR(store.messageR)
+                    } else if (store.messageR === store.messageL) {
+                        store.setMessageR(store.messageR + 1)
+                        messageR(store.messageR)
+                    }
+                } else if (store.messageL === 0 && store.messageR > 0) {
                     store.setMessageL(store.messageL + 1)
                     messageL(store.messageL)
+                } else if (store.messageL === 0 && store.messageR < 0) {
+                    store.setMessageL(store.messageL - 1)
+                    messageL(store.messageL)
                 }
-                // if (store.messageR > 0) {
-                //     FBR(true)
-                //
-                // }
-                // if (store.messageL < speed && store.messageR < speed) {
-                //     store.setMessageR(store.messageR + 1)
-                //     messageR(store.messageR)
-                // }
-            }
-
-
-            // if(store.reversal === true){
+            //}
+            // else if(store.reversal === true){
             //     if(store.messageL > 0 && store.messageR < 0) {
             //         FBL(false)
             //         FBR(true)
@@ -203,7 +256,7 @@ const ButtonControl = observer(() => {
             //         messageL(store.messageL)
             //     }
             // }
-
+            console.log('CMD DOWN: WWWWW ' + store.messageR);
         }
     }
     useEventListener('keydown', handlerDOWN);
@@ -277,10 +330,10 @@ const ButtonControl = observer(() => {
                             :
                             '...'
                         }{store.messageR}{store.reversal ? ' разворот' : ''}</div>
-                        <div>{ store.arduinoOnOff !== null ?
-                            store.arduinoOnOff ? 'OFF ' : 'ON '
-                            :
-                            '...'}</div>
+                        {/*<div>{ store.arduinoOnOff !== null ?*/}
+                        {/*    store.arduinoOnOff ? 'OFF ' : 'ON '*/}
+                        {/*    :*/}
+                        {/*    '...'}</div>*/}
                         {/*<div className="Joy">*/}
                         {/*    <Demonstration/>*/}
                         {/*<input style={{width:'20%', backgroundColor:'black'}} type="text" value="" onKeyPress={(e) => handler(e)} />*/}
@@ -298,4 +351,3 @@ const ButtonControl = observer(() => {
 });
 
 export default ButtonControl;
-
