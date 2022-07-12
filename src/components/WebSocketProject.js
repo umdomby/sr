@@ -7,6 +7,7 @@ const WebSocketProject = (id) => {
         }
         store.setWebSocket(new WebSocket('wss://servicerobot.pro:4433'))
         //store.setWebSocket(new WebSocket('wss://umdom.by:4433'))
+        //store.setWebSocket(new WebSocket('wss://localhost:4433'))
 
         store.webSocket.onopen = () => {
             store.webSocket.send(JSON.stringify({

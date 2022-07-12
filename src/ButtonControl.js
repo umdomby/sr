@@ -50,9 +50,8 @@ const ButtonControl = observer(() => {
     function handlerUP({ key }) {
 
         if(String(key) === 'Shift') {
-            Stop()
-            store.setReversal(!store.reversal)
-            console.log('Shift ' + store.reversal)
+            // Stop()
+            // store.setReversal(!store.reversal)
             // FBL(!store.messageFBL)
             // FBR(!store.messageFBR)
             // console.log('messageFBL ' + store.messageFBL)
@@ -103,160 +102,109 @@ const ButtonControl = observer(() => {
             }))
         }
 
-        if(String(key) === 'a' || String(key) === 'A' || String(key) === 'ф' || String(key) === 'Ф') {
-                if(store.messageL < 0 && store.messageR > 0){
-                    FBL(true)
-                    FBR(false)
-                }
-                if (store.messageL > -speed && store.messageR < speed) {
-                    store.setMessageR(store.messageR + 1)
-                    messageR(store.messageR)
-                    store.setMessageL(store.messageL - 1)
-                    messageL(store.messageL)
-                }
-        }
-        if(String(key) === 'd' || String(key) === 'D' || String(key) === 'в' || String(key) === 'В'){
-                if(store.messageL > 0 && store.messageR < 0) {
-                    FBL(false)
-                    FBR(true)
-                }
-                if (store.messageR > -speed && store.messageL < speed) {
-                    store.setMessageR(store.messageR - 1)
-                    messageR(store.messageR)
-                    store.setMessageL(store.messageL + 1)
-                    messageL(store.messageL)
-                }
+        if(String(key) === 'a' || String(key) === 'A' || String(key) === 'ф' || String(key) === 'Ф'){
+            if(    store.messageL === 3 && store.messageR === 3
+                || store.messageL === 3 && store.messageR === 2
+                || store.messageL === 3 && store.messageR === 1){
+                FBR(true)
+                store.setMessageR(store.messageR - 1)
+                messageR(store.messageR)
+            }
+            else if (   store.messageL < 3 && store.messageR < 3
+                     && store.messageL >= 0 && store.messageR >= 0) {
+                FBL(true)
+                store.setMessageL(store.messageL + 1)
+                messageL(store.messageL)
+            }
+            else if(store.messageR === 3 && store.messageL < 3){
+                FBL(true)
+                store.setMessageL(store.messageL + 1)
+                messageL(store.messageL)
+            }
+
         }
 
-        if(String(key) === 'w' || String(key) === 'W' || String(key) === 'ц' || String(key) === 'Ц') {
-            if (store.reversal === false) {
-                if (store.messageL > 0) {
-                    FBL(true)
-                    console.log('messageFBL ' + store.messageFBL)
-                }
-                if (store.messageR > 0) {
-                    FBR(true)
-                    console.log('messageFBR ' + store.messageFBR)
-                }
-                if (store.messageL < speed && store.messageR < speed) {
-                    store.setMessageL(store.messageL + 1)
-                    store.setMessageR(store.messageR + 1)
-                    messageL(store.messageL)
-                    messageR(store.messageR)
-                }
-            }
-        }
-        if(String(key) === 's' || String(key) === 'S' || String(key) === 'ы' || String(key) === 'Ы'){
-            if(store.reversal === false) {
-                if (store.messageL < 0) {
-                    FBL(false)
-                    console.log('messageFBL ' + store.messageFBL)
-                }
-                if (store.messageR < 0) {
-                    FBR(false)
-                    console.log('messageFBR ' + store.messageFBR)
-                }
-                if (store.messageL > -speed) {
-                    store.setMessageL(store.messageL - 1)
-                    store.setMessageR(store.messageR - 1)
-                }
+        if(String(key) === 'd' || String(key) === 'D' || String(key) === 'в' || String(key) === 'В'){
+
+            if(    store.messageL === 3 && store.messageR === 3
+                || store.messageL === 2 && store.messageR === 3
+                || store.messageL === 1 && store.messageR === 3){
+                FBL(true)
+                store.setMessageL(store.messageL - 1)
                 messageL(store.messageL)
+            }
+            else if (   store.messageL < 3 && store.messageR < 3
+                     && store.messageL >= 0 && store.messageR >= 0){
+                FBR(true)
+                store.setMessageR(store.messageR + 1)
+                messageR(store.messageR)
+            }
+            else if(store.messageL === 3 && store.messageR < 3){
+                FBR(true)
+                store.setMessageR(store.messageR + 1)
                 messageR(store.messageR)
             }
         }
 
-        if(String(key) === 'e' || String(key) === 'E' || String(key) === 'у' || String(key) === 'У') {
-            //if(store.reversal == false) {
-                if (store.messageR > 0 && store.messageL > 0) {
-                    if (store.messageR < store.messageL && store.messageL <= speed) {
-                        store.setMessageR(store.messageR + 1)
-                        messageR(store.messageR)
-                    } else if (store.messageR > store.messageL) {
-                        store.setMessageL(store.messageL - 1)
-                        messageL(store.messageL)
-                    } else if (store.messageR === store.messageL) {
-                        store.setMessageL(store.messageL - 1)
-                        messageL(store.messageL)
-                    }
-                } else if (store.messageR < 0 && store.messageL < 0) {
-                    if (store.messageR > store.messageL && store.messageL <= speed) {
-                        store.setMessageR(store.messageR - 1)
-                        messageR(store.messageR)
-                    } else if (store.messageR < store.messageL) {
-                        store.setMessageL(store.messageL + 1)
-                        messageL(store.messageL)
-                    } else if (store.messageR === store.messageL) {
-                        store.setMessageL(store.messageL + 1)
-                        messageL(store.messageL)
-                    }
-                } else if (store.messageR === 0 && store.messageL > 0) {
-                    store.setMessageR(store.messageR + 1)
-                    messageR(store.messageR)
-                } else if (store.messageR === 0 && store.messageL < 0) {
-                    store.setMessageR(store.messageR - 1)
-                    messageR(store.messageR)
-                }
-            // }
-            // else if(store.reversal === true){
-            //     if(store.messageL < 0 && store.messageR > 0){
-            //         FBL(true)
-            //         FBR(false)
-            //     }
-            //     if (store.messageL > -speed && store.messageR < speed) {
-            //         store.setMessageR(store.messageR + 1)
-            //         messageR(store.messageR)
-            //         store.setMessageL(store.messageL - 1)
-            //         messageL(store.messageL)
-            //     }
-            // }
-
-            console.log('CMD DOWN: WWWWW ' + store.messageL);
+        if(String(key) === 'w' || String(key) === 'W' || String(key) === 'ц' || String(key) === 'Ц') {
+            if (store.messageL < speed) {
+                FBL(true)
+                store.setMessageL(store.messageL + 1)
+                messageL(store.messageL)
+            }
+            if (store.messageR < speed) {
+                FBR(true)
+                store.setMessageR(store.messageR + 1)
+                messageR(store.messageR)
+            }
+            if (store.messageL > 0) {
+                FBL(true)
+            }
+            if (store.messageR > 0) {
+                FBR(true)
+            }
         }
-        if(String(key) === 'q' || String(key) === 'Q' || String(key) === 'й' || String(key) === 'Й'){
-            //if(store.reversal === false) {
-                if (store.messageR > 0 && store.messageL > 0) {
-                    if (store.messageL < store.messageR && store.messageR <= speed) {
-                        store.setMessageL(store.messageL + 1)
-                        messageL(store.messageL)
-                    } else if (store.messageL > store.messageR) {
-                        store.setMessageR(store.messageR - 1)
-                        messageR(store.messageR)
-                    } else if (store.messageR === store.messageL) {
-                        store.setMessageR(store.messageR - 1)
-                        messageR(store.messageR)
-                    }
-                } else if (store.messageR < 0 && store.messageL < 0) {
-                    if (store.messageL > store.messageR && store.messageR <= speed) {
-                        store.setMessageL(store.messageL - 1)
-                        messageL(store.messageL)
-                    } else if (store.messageL < store.messageR) {
-                        store.setMessageR(store.messageR + 1)
-                        messageR(store.messageR)
-                    } else if (store.messageR === store.messageL) {
-                        store.setMessageR(store.messageR + 1)
-                        messageR(store.messageR)
-                    }
-                } else if (store.messageL === 0 && store.messageR > 0) {
-                    store.setMessageL(store.messageL + 1)
-                    messageL(store.messageL)
-                } else if (store.messageL === 0 && store.messageR < 0) {
-                    store.setMessageL(store.messageL - 1)
-                    messageL(store.messageL)
-                }
-            //}
-            // else if(store.reversal === true){
-            //     if(store.messageL > 0 && store.messageR < 0) {
-            //         FBL(false)
-            //         FBR(true)
-            //     }
-            //     if (store.messageR > -speed && store.messageL < speed) {
-            //         store.setMessageR(store.messageR - 1)
-            //         messageR(store.messageR)
-            //         store.setMessageL(store.messageL + 1)
-            //         messageL(store.messageL)
-            //     }
-            // }
-            console.log('CMD DOWN: WWWWW ' + store.messageR);
+
+        if(String(key) === 's' || String(key) === 'S' || String(key) === 'ы' || String(key) === 'Ы'){
+            if (store.messageL > -speed) {
+                store.setMessageL(store.messageL - 1)
+                store.setMessageR(store.messageR - 1)
+                messageL(store.messageL)
+                messageR(store.messageR)
+            }
+            if (store.messageL < 0) {
+                FBL(false)
+            }
+            if (store.messageR < 0) {
+                FBR(false)
+            }
+
+        }
+
+        if(String(key) === 'q' || String(key) === 'Q' || String(key) === 'й' || String(key) === 'Й') {
+            if (store.messageL > -speed) {
+                store.setMessageR(store.messageR + 1)
+                messageR(store.messageR)
+                store.setMessageL(store.messageL - 1)
+                messageL(store.messageL)
+            }
+            if (store.messageL < 0 && store.messageR > 0) {
+                FBL(true)
+                FBR(false)
+            }
+        }
+
+        if(String(key) === 'e' || String(key) === 'E' || String(key) === 'у' || String(key) === 'У') {
+            if (store.messageR > -speed) {
+                store.setMessageR(store.messageR - 1)
+                messageR(store.messageR)
+                store.setMessageL(store.messageL + 1)
+                messageL(store.messageL)
+            }
+            if(store.messageL > 0 && store.messageR < 0) {
+                FBL(false)
+                FBR(true)
+            }
         }
     }
     useEventListener('keydown', handlerDOWN);
@@ -294,42 +242,47 @@ const ButtonControl = observer(() => {
                         <div>Управление: "w  s  a  d"</div>
                     </Col>
                     <Col>
-                        <div>{ store.arduinoFBL !== null ?
-                            store.arduinoFBL ? 'вперед ' : 'назад '
-                            :
-                            '...'
-                        }{store.messageL} {store.reversal ? ' разворот' : ''}</div>
-                        <input
-                            type="range"
-                            min={-speed}
-                            max={speed}
-                            value={store.messageL}
-                            className="form-range"
-                            onChange={(event) => {
-                                //localStorage.setItem('localSpeedStateUD', event.target.value)
-                                handleChangeMessageL(event.target.value)
-                            }}
-                            id="customRange1">
-                        </ input>
-
-
-                        <input
-                            type="range"
-                            min={-speed}
-                            max={speed}
-                            value={store.messageR}
-                            className="form-range"
-                            onChange={(event) => {
-                                //localStorage.setItem('localSpeedStateUD', event.target.value)
-                                handleChangeMessageR(event.target.value)
-                            }}
-                            id="customRange1">
-                        </ input>
-                        <div>{ store.arduinoFBR !== null ?
+                        <div style={{float: 'left', width: '20%'}}>{ store.arduinoFBR !== null ?
                             store.arduinoFBR ? 'вперед ' : 'назад '
                             :
                             '...'
                         }{store.messageR}{store.reversal ? ' разворот' : ''}</div>
+                        <div style={{ transform: 'rotate(-90deg)',  float: 'left', width: '60%'}}>
+                            <div style={{ width: '60%'}}>
+                                <input style={{float: 'left'}}
+                                       type="range"
+                                       min={-speed}
+                                       max={speed}
+                                       value={store.messageR}
+                                       className="form-range"
+                                       onChange={(event) => {
+                                           //localStorage.setItem('localSpeedStateUD', event.target.value)
+                                           handleChangeMessageR(event.target.value)
+                                       }}
+                                       id="customRange1">
+                                </ input>
+                                <input style={{float: 'left'}}
+                                    type="range"
+                                    min={-speed}
+                                    max={speed}
+                                    value={store.messageL}
+                                    className="form-range"
+                                    onChange={(event) => {
+                                        //localStorage.setItem('localSpeedStateUD', event.target.value)
+                                        handleChangeMessageL(event.target.value)
+                                    }}
+                                    id="customRange1">
+                                </ input>
+                            </div>
+                        </div>
+                        <div style={{float: 'left', width: '20%'}}>
+                            { store.arduinoFBL !== null ?
+                                store.arduinoFBL ? 'вперед ' : 'назад '
+                                :
+                                '...'
+                            }{store.messageL} {store.reversal ? ' разворот' : ''}</div>
+
+
                         {/*<div>{ store.arduinoOnOff !== null ?*/}
                         {/*    store.arduinoOnOff ? 'OFF ' : 'ON '*/}
                         {/*    :*/}

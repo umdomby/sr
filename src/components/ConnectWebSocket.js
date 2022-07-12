@@ -11,7 +11,7 @@ const ConnectWebSocket = observer(() => {
     useEffect(()=>{
         if( localStorage.getItem('localIdSocket') === null || localStorage.getItem('localIdSocket') === undefined) {
             //localStorage.setItem('localIdSocket', pass_gen())
-            localStorage.setItem('localIdSocket', '123')
+            localStorage.setItem('localIdSocket', '')
         }
         setIdSocket(localStorage.getItem('localIdSocket') || '')
         store.setIdSocket(idSocket)
