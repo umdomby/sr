@@ -148,12 +148,10 @@ const ButtonControl = observer(() => {
 
         if(String(key) === 'w' || String(key) === 'W' || String(key) === 'ц' || String(key) === 'Ц') {
             if (store.messageL < speed) {
-                FBL(true)
                 store.setMessageL(store.messageL + 1)
                 messageL(store.messageL)
             }
             if (store.messageR < speed) {
-                FBR(true)
                 store.setMessageR(store.messageR + 1)
                 messageR(store.messageR)
             }
@@ -235,11 +233,15 @@ const ButtonControl = observer(() => {
             <Container>
                 <Row>
                     <Col>
-                        <div>ON: "Enter" </div>
-                        <div>OFF: "Escape" </div>
-                        <div>Тормоз: "Space"</div>
-                        <div>Разворот или прямая: "Shift"</div>
-                        <div>Управление: "w  s  a  d"</div>
+                        <div>{ store.arduinoOnOff !== null ?
+                            store.arduinoOnOff ? 'OFF ' : 'ON '
+                            :
+                            '...'}</div>
+                        {/*<div>ON: "Enter" </div>*/}
+                        {/*<div>OFF: "Escape" </div>*/}
+                        {/*<div>Тормоз: "Space"</div>*/}
+                        {/*<div>Разворот или прямая: "Shift"</div>*/}
+                        {/*<div>Управление: "w  s  a  d"</div>*/}
                     </Col>
                     <Col>
                         <div style={{float: 'left', width: '20%'}}>{ store.arduinoFBR !== null ?
@@ -282,11 +284,6 @@ const ButtonControl = observer(() => {
                                 '...'
                             }{store.messageL} {store.reversal ? ' разворот' : ''}</div>
 
-
-                        {/*<div>{ store.arduinoOnOff !== null ?*/}
-                        {/*    store.arduinoOnOff ? 'OFF ' : 'ON '*/}
-                        {/*    :*/}
-                        {/*    '...'}</div>*/}
                         {/*<div className="Joy">*/}
                         {/*    <Demonstration/>*/}
                         {/*<input style={{width:'20%', backgroundColor:'black'}} type="text" value="" onKeyPress={(e) => handler(e)} />*/}
