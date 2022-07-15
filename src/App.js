@@ -30,7 +30,8 @@ const App = observer(() => {
     // };
 
     return (
-        <div className="App">
+         <div className="App">
+        {/*<div>*/}
             <div>
                 <Video/>
             </div>

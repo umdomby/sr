@@ -229,41 +229,69 @@ const ButtonControl = observer(() => {
     }
 
     return (
-        <div className="App" >
-            <Container>
+        <div className="App Panel PanelButton">
+            {/*<Container>*/}
                 <Row>
-                    <Col>
-                        <div>{ store.arduinoOnOff !== null ?
-                            store.arduinoOnOff ? 'OFF ' : 'ON '
-                            :
-                            '...'}</div>
-                        {/*<div>ON: "Enter" </div>*/}
-                        {/*<div>OFF: "Escape" </div>*/}
-                        {/*<div>Тормоз: "Space"</div>*/}
-                        {/*<div>Разворот или прямая: "Shift"</div>*/}
-                        {/*<div>Управление: "w  s  a  d"</div>*/}
+                    {/*<Col className="col-sm-1">*/}
+
+                    {/*    /!*<div>ON: "Enter" </div>*!/*/}
+                    {/*    /!*<div>OFF: "Escape" </div>*!/*/}
+                    {/*    /!*<div>Тормоз: "Space"</div>*!/*/}
+                    {/*    /!*<div>Разворот или прямая: "Shift"</div>*!/*/}
+                    {/*    /!*<div>Управление: "w  s  a  d"</div>*!/*/}
+                    {/*</Col>*/}
+                    <Col className="col-3">
+                        <div style={{transform: 'rotate(-90deg)'}}>
+                            <div style={{width: '55%'}}>
+                                <input
+                                    type="range"
+                                    min={-speed}
+                                    max={speed}
+                                    value={store.messageR}
+                                    className="form-range"
+                                    onChange={(event) => {
+                                        //localStorage.setItem('localSpeedStateUD', event.target.value)
+                                        handleChangeMessageR(event.target.value)
+                                    }}
+                                    id="customRange1">
+                                </ input>
+                            </div>
+                        </div>
                     </Col>
-                    <Col>
-                        <div style={{float: 'left', width: '20%'}}>{ store.arduinoFBR !== null ?
+
+                    <Col className="col-1">
+                        <div>{ store.arduinoFBR !== null ?
                             store.arduinoFBR ? 'вперед ' : 'назад '
                             :
                             '...'
                         }{store.messageR}{store.reversal ? ' разворот' : ''}</div>
-                        <div style={{ transform: 'rotate(-90deg)',  float: 'left', width: '60%'}}>
-                            <div style={{ width: '60%'}}>
-                                <input style={{float: 'left'}}
-                                       type="range"
-                                       min={-speed}
-                                       max={speed}
-                                       value={store.messageR}
-                                       className="form-range"
-                                       onChange={(event) => {
-                                           //localStorage.setItem('localSpeedStateUD', event.target.value)
-                                           handleChangeMessageR(event.target.value)
-                                       }}
-                                       id="customRange1">
-                                </ input>
-                                <input style={{float: 'left'}}
+                    </Col>
+                    <Col className="col-4">
+                        <div>
+                            <div style={{marginLeft: '10px'}}>{ store.arduinoOnOff !== null ?
+                                store.arduinoOnOff ? 'OFF ' : 'ON '
+                                :
+                                '...'}</div>
+                            <ConnectWebSocket/>
+                        </div>
+                    </Col>
+                    <Col className="col-1">
+                        <div>
+                            { store.arduinoFBL !== null ?
+                                store.arduinoFBL ? 'вперед ' : 'назад '
+                                :
+                                '...'
+                            }{store.messageL} {store.reversal ? ' разворот' : ''}</div>
+
+                        {/*<div className="Joy">*/}
+                        {/*    <Demonstration/>*/}
+                        {/*<input style={{width:'20%', backgroundColor:'black'}} type="text" value="" onKeyPress={(e) => handler(e)} />*/}
+                        {/*</div>*/}
+                    </Col>
+                    <Col className="col-3 PanelButton">
+                        <div style={{transform: 'rotate(-90deg)'}}>
+                            <div style={{width: '55%'}}>
+                                <input
                                     type="range"
                                     min={-speed}
                                     max={speed}
@@ -277,25 +305,9 @@ const ButtonControl = observer(() => {
                                 </ input>
                             </div>
                         </div>
-                        <div style={{float: 'left', width: '20%'}}>
-                            { store.arduinoFBL !== null ?
-                                store.arduinoFBL ? 'вперед ' : 'назад '
-                                :
-                                '...'
-                            }{store.messageL} {store.reversal ? ' разворот' : ''}</div>
-
-                        {/*<div className="Joy">*/}
-                        {/*    <Demonstration/>*/}
-                        {/*<input style={{width:'20%', backgroundColor:'black'}} type="text" value="" onKeyPress={(e) => handler(e)} />*/}
-                        {/*</div>*/}
-                    </Col>
-                    <Col>
-                        <div>
-                            <ConnectWebSocket/>
-                        </div>
                     </Col>
                 </Row>
-            </Container>
+            {/*</Container>*/}
         </div>
     );
 });

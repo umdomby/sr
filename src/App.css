@@ -9,6 +9,13 @@
 /*  margin-left: auto;*/
 /*  margin-right: auto;*/
 /*}*/
+.PanelButton {
+  margin-left: auto;
+  margin-right: auto;
+  /*width: 50%;*/
+  /*height: calc(100% - 300px);*/
+  /*26px - Высота шапки*/
+}
 
 @media (max-width: 400px) {
   .App {
@@ -19,7 +26,7 @@
     width: 100%;
   }
   .Panel {
-    width: 100%;
+    width: 90%;
   }
   .Joy {
     /*margin: auto;*/
@@ -36,7 +43,7 @@
     width: 100%;
   }
   .Panel {
-    width: 70%;
+    width: 90%;
   }
   .Joy {
     /*margin: auto;*/
@@ -63,6 +70,22 @@
 }
 
 @media (min-width: 1200px) and (max-width: 1920px) {
+  .App {
+    text-align: center;
+  }
+  video {
+    width: 50%;
+  }
+  .Panel {
+    width: 50%;
+  }
+  .Joy {
+    /*margin: auto;*/
+    /*position: fixed;*/
+    /*top: 80%; left: 0; bottom: 0; right: 0;*/
+  }
+}
+@media (min-width: 1920px) and (max-width: 7680px){
   .App {
     text-align: center;
   }

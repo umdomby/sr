@@ -33,11 +33,10 @@ const ConnectWebSocket = observer(() => {
     }
 
     return (
-        <div className="App">
-            <div>
+        <div>
                 <input type='text'
                        disabled={false}
-                       style={{backgroundColor: '#D3D3D3', textAlign: 'center', borderWidth: 1, width: 120, fontSize: 16, marginTop: 4, marginRight: 5}}
+                       style={{backgroundColor: '#D3D3D3', textAlign: 'center', borderWidth: 1, width: '100%', fontSize: 16, marginTop: 4}}
                        value={idSocket}
                        onChange={(event) => {
                            localStorage.setItem('localIdSocket', event.target.value)
@@ -45,7 +44,6 @@ const ConnectWebSocket = observer(() => {
                            store.setIdSocket(event.target.value)
                        }}
                 />
-            </div>
             {/*<div>*/}
             {/*    <button onClick={connectID}>Connect</button>*/}
             {/*</div>*/}
