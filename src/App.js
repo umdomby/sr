@@ -7,14 +7,17 @@ import {observer} from "mobx-react-lite";
 //import styled from 'styled-components';
 //import Main from './components/VideoChat/Main/Main';
 //import Room from './components/VideoChat/Room/Room';
-
 import React, {useEffect, useState} from "react";
-import Video from "./components/Video/Video";
+// import Video from "./components/Video/Video";
 //import WebSocketProject from "./components/WebSocketProject";
 //import ConnectWebSocket from "./components/ConnectWebSocket";
 import 'react-rangeslider/lib/index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ButtonControl from "./ButtonControl"
+
+import {Outlet, Link, useLocation, NavLink } from "react-router-dom";
+
+
 const App = observer(() => {
 
     // useEffect(()=>{
@@ -29,14 +32,23 @@ const App = observer(() => {
     //     console.log(event.key);
     // };
 
+    function QueryNavLink({ to, ...props }) {
+        let location = useLocation();
+        return <NavLink to={to + location.search} {...props} />;
+    }
+
     return (
          <div className="App">
         {/*<div>*/}
-            <div>
-                <Video/>
-            </div>
-            <ButtonControl/>
 
+             {/*<Video/>*/}
+             <Link to="/">Home</Link> |{" "}
+             <Link to="/production">Production</Link>|{" "}
+             <Link to="/video">Control</Link>
+
+
+
+            <Outlet />
 
             {/*    /!*<CameraFaceDetect/>*!/*/}
             {/*    /!*<Dictaphone33/>*!/*/}

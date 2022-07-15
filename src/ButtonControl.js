@@ -261,10 +261,10 @@ const ButtonControl = observer(() => {
 
                     <Col className="col-1">
                         <div>{ store.arduinoFBR !== null ?
-                            store.arduinoFBR ? 'вперед ' : 'назад '
+                            store.arduinoFBR ? 'UP ' : 'DOWN '
                             :
                             '...'
-                        }{store.messageR}{store.reversal ? ' разворот' : ''}</div>
+                        }{store.messageR}{store.reversal ? ' reverse' : ''}</div>
                     </Col>
                     <Col className="col-4">
                         <div>
@@ -272,13 +272,17 @@ const ButtonControl = observer(() => {
                                 store.arduinoOnOff ? 'OFF ' : 'ON '
                                 :
                                 '...'}</div>
+                            <label>"ENTER ID"</label>
                             <ConnectWebSocket/>
+                            <div style={{marginTop: '15px'}} >
+                                <a href="../video/?publish=true" className="nav-link d-inline" target="_blank" rel="noopener noreferrer">Add video</a>
+                            </div>
                         </div>
                     </Col>
                     <Col className="col-1">
                         <div>
                             { store.arduinoFBL !== null ?
-                                store.arduinoFBL ? 'вперед ' : 'назад '
+                                store.arduinoFBL ? 'UP ' : 'DOWN '
                                 :
                                 '...'
                             }{store.messageL} {store.reversal ? ' разворот' : ''}</div>

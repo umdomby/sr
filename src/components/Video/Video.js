@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Client, LocalStream } from 'ion-sdk-js';
 import { IonSFUJSONRPCSignal } from 'ion-sdk-js/lib/signal/json-rpc-impl';
+import ButtonControl from "../../ButtonControl";
 
 const Video = () => {
     const pubVideo = useRef();
@@ -78,12 +79,12 @@ const Video = () => {
         <div>
             {isPub ? (
                 <div>
-                    <header style={{marginBottom: "5px"}}  className="flex h-16 justify-center items-center text-xl bg-black text-white">
+                    <header style={{marginBottom: "10px", marginTop: "10px"}}>
                         {/*<div>ion-sfu</div>*/}
                         {isPub ? (
                             <div className="absolute top-2 right-5">
-                                <button id="bnt_pubcam" className="bg-blue-500 px-4 py-2 text-white rounded-lg mr-5" onClick={() => start(true)}>Publish Camera</button>
-                                <button id="bnt_pubscreen" className="bg-green-500 px-4 py-2 text-white rounded-lg" onClick={() => start(false)}>Publish Screen</button>
+                                <button id="bnt_pubcam" onClick={() => start(true)}>Publish Camera</button>
+                                <button id="bnt_pubscreen" onClick={() => start(false)}>Publish Screen</button>
                             </div >
                         ) : null
                         }
@@ -93,6 +94,7 @@ const Video = () => {
             ) : (
                 <video autoPlay={true} id="subVideo" className="bg-black" controls ref={subVideo}></video>
             )}
+            <ButtonControl/>
         </div>
     );
 }
